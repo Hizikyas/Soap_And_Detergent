@@ -1,6 +1,5 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
 import Link from 'next/link';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
 
 interface FooterProps {
   darkMode: boolean;
@@ -14,24 +13,22 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold">CleanCo</h3>
+            <div className="w-full h-32 bg-gray-700 rounded-lg flex items-center justify-center">
+              <span className="text-gray-400 text-sm">Interactive Map</span>
+            </div>
             <p className="text-gray-300">
               Leading the way in innovative cleaning solutions for over 30 years.
             </p>
-            <div className="flex space-x-4">
-              <Facebook className="hover:text-blue-400 cursor-pointer transition-colors duration-300" size={20} />
-              <Twitter className="hover:text-blue-400 cursor-pointer transition-colors duration-300" size={20} />
-              <Instagram className="hover:text-pink-400 cursor-pointer transition-colors duration-300" size={20} />
-            </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link href="#home" className="text-gray-300 hover:text-white transition-colors duration-300">Home</Link></li>
-              <li><Link href="#products" className="text-gray-300 hover:text-white transition-colors duration-300">Products</Link></li>
-              <li><Link href="#about" className="text-gray-300 hover:text-white transition-colors duration-300">About Us</Link></li>
-              <li><Link href="#contact" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</Link></li>
+              <li><Link href="/" className="text-gray-300 hover:text-white transition-colors duration-300">Home</Link></li>
+              <li><Link href="/products" className="text-gray-300 hover:text-white transition-colors duration-300">Products</Link></li>
+              <li><Link href="/about_us" className="text-gray-300 hover:text-white transition-colors duration-300">About Us</Link></li>
+              <li><Link href="/contact_us" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</Link></li>
             </ul>
           </div>
 
@@ -62,13 +59,18 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                 <MapPin size={16} />
                 <span className="text-gray-300">123 Clean Street, Soap City, SC 12345</span>
               </div>
+              <div className="flex space-x-4 mt-4">
+                <a href="#" aria-label="Facebook"><Facebook className="hover:text-blue-400 cursor-pointer transition-colors duration-300" size={20} /></a>
+                <a href="#" aria-label="Twitter"><Twitter className="hover:text-blue-400 cursor-pointer transition-colors duration-300" size={20} /></a>
+                <a href="#" aria-label="Instagram"><Instagram className="hover:text-pink-400 cursor-pointer transition-colors duration-300" size={20} /></a>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-300">
-            © 2025 CleanCo. All rights reserved. | Privacy Policy | Terms of Service
+            © 2025 CleanCo. All rights reserved. | <Link href="/privacy" className="hover:text-white">Privacy Policy</Link> | <Link href="/terms" className="hover:text-white">Terms of Service</Link>
           </p>
         </div>
       </div>

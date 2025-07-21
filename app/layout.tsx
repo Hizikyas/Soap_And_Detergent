@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import React, { useState, useEffect, createContext, useContext } from "react";
@@ -25,7 +24,7 @@ export function useDarkMode() {
   return useContext(DarkModeContext);
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
