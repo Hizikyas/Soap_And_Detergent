@@ -1,3 +1,5 @@
+@import 'leaflet/dist/leaflet.css';
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -152,6 +154,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.dark {
+  background-color: #1f2937; /* Tailwind's gray-800 */
+  color: #f9fafb; /* Tailwind's gray-100 */
 }
 
 .animate-fade-in {
