@@ -10,18 +10,13 @@ const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLa
 const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
 const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
 
-interface MapSectionProps {
-  darkMode: boolean;
-}
 
-const MapSection: React.FC<MapSectionProps> = ({ darkMode }) => {
+const MapSection: React.FC<> = () => {
   // Sample coordinates for CleanCo store (e.g., New York City)
   const position: [number, number] = [40.7128, -74.0060];
 
   // Adjust map style based on dark mode
-  const mapStyle = darkMode
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const mapStyle = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   // Fix for default marker icon in Leaflet, run only in browser
   useEffect(() => {
@@ -36,7 +31,7 @@ const MapSection: React.FC<MapSectionProps> = ({ darkMode }) => {
   }, []);
 
   return (
-    <div className={`h-[150px] md:h-[200px] rounded-lg overflow-hidden shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'} transition-colors duration-300 -ml-2 md:-ml-4`}>
+    <div className={`h-[150px] md:h-[200px] rounded-lg overflow-hidden shadow-lg  transition-colors duration-300 -ml-2 md:-ml-4`}>
       <MapContainer
         center={position}
         zoom={13}

@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           {/* Company Info */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold">CleanCo</h3>
-              <MapSection darkMode={darkMode} />
+              <MapSection />
               <p className="text-gray-300">
                 Leading the way in innovative cleaning solutions for over 30 years.
               </p>
