@@ -27,7 +27,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               <div className="space-y-3">
                 <h4 className="text-lg font-semibold">Quick Links</h4>
                 <ul className="space-y-3">
-                  <li><Link href="/" className="text-gray-300 hover:text-white transition-colors duration-300">Home</Link></li>
+                  <li><Link href="/" className="text-gray-300 hover:text-white  transition-colors duration-300">Home</Link></li>
                   <li><Link href="/products" className="text-gray-300 hover:text-white transition-colors duration-300">Products</Link></li>
                   <li><Link href="/about_us" className="text-gray-300 hover:text-white transition-colors duration-300">About Us</Link></li>
                   <li><Link href="/contact_us" className="text-gray-300 hover:text-white transition-colors duration-300">Contact</Link></li>
