@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 interface WhoWeAreProps {
   darkMode: boolean;
@@ -74,7 +75,7 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
                   : 'bg-[#A31621] text-white hover:bg-[#7a1018]'
               } px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg`}
             >
-              Learn More
+             <Link href="/learn_more"> Learn More</Link>
             </motion.button>
           </motion.div>
 
