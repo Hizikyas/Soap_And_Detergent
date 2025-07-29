@@ -10,7 +10,7 @@ export default function ProductDetailPage() {
   if(!params?.slug)
     return <div>Product not found</div>;
 
-  const productName = params.slug as string;
-  
-  return <ProductDetail darkMode={darkMode} productName={productName}/>;
+  // const productName = params.slug as string;
+  const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+  return <ProductDetail darkMode={darkMode} productName={slug}/>;
 }

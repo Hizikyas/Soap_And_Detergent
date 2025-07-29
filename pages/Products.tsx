@@ -149,7 +149,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   transition={{ duration: 0.3 }}
                 />
 
-                {/* Hover Content */}
+                {/* Hover Content */} 
                 <motion.div
                   className="absolute inset-0 flex flex-col items-center justify-center"
                   animate={{

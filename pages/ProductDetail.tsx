@@ -1,7 +1,9 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProductDetailProps {
   productName: string;
@@ -9,7 +11,9 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = false }) => {
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const productData = {
     'ultra-clean-detergent': {
@@ -47,7 +51,47 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
         'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
         'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
       ]
-    }
+    },
+    'multi-surface-cleaner': {
+      name: 'Multi-Surface Cleaner',
+      description:
+        'Our Multi-Surface Cleaner is your go-to solution for everyday messes on a variety of surfaces. This fast-drying formula effectively lifts dirt, dust, and grime from countertops, tables, appliances, and more. Safe for use on sealed wood, glass, stainless steel, and plastic, it leaves behind a fresh scent and a streak-free shine.',
+      images: [
+        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+      ]
+    },
+    'premium-fabric-care': {
+      name: 'Premium Fabric Care',
+      description:
+        'Pamper your delicate fabrics with our Premium Fabric Care solution. Specially formulated for silks, wools, and other fine garments, it gently cleans without fading or stretching. Enriched with fabric conditioners, it maintains softness and extends the life of your clothes. Perfect for hand washing or delicate cycles in your washing machine.',
+      images: [
+        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+      ]
+    },
+    'glass-cleaner-pro': {
+      name: 'Glass Cleaner Pro',
+      description:
+        'Achieve a crystal-clear finish with Glass Cleaner Pro. Designed for windows, mirrors, and glass surfaces, this ammonia-free formula cuts through fingerprints, smudges, and grime with ease. It dries quickly without leaving streaks or residue, making it perfect for both residential and commercial use.',
+      images: [
+        'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+      ]
+    },
+    'eco-friendly-line': {
+      name: 'Eco-Friendly Line',
+      description:
+        'Our Eco-Friendly Line offers powerful cleaning performance with a conscience. Made with biodegradable ingredients and packaged in recyclable materials, these products are tough on dirt but gentle on the planet. Ideal for environmentally conscious households looking to reduce their footprint without sacrificing cleanliness.',
+      images: [
+        'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+      ]
+    },
   };
 
   const product = productData[productName] || {
@@ -56,58 +100,114 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     images: ['https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1']
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % product.images.length);
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, [product.images.length]);
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % product.images.length);
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + product.images.length) % product.images.length);
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!isHovered) {
+      timer = setInterval(() => {
+        setDirection(1);
+        setCurrentSlide((prev) => (prev + 1) % product.images.length);
+      }, 5000);
+    }
+    return () => clearInterval(timer);
+  }, [product.images.length, isHovered]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  });
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev + 1) % product.images.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev - 1 + product.images.length) % product.images.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
   };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+        {/* Go Back Icon and Text */}
+        <Link
+          href="/products"
+          className="absolute top-16 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
+          aria-label="Go back to products"
+        >
+          <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
+          <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
+        </Link>
+
         {/* Product Image Carousel */}
-        <div className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12">
-          {product.images.map((image: string, index: number) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentImage ? 'opacity-100' : 'opacity-0'
-              }`}
+        <div
+          className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12 mt-16"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={currentSlide}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
+                opacity: { duration: 0.8 },
+              }}
+              className="absolute inset-0"
             >
               <img
-                src={image}
-                alt={`${product.name} - View ${index + 1}`}
+                src={product.images[currentSlide]}
+                alt={`${product.name} - View ${currentSlide + 1}`}
                 className="w-full h-full object-cover"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Navigation Arrows */}
           <button
-            onClick={prevImage}
+            onClick={prevSlide}
             className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
             aria-label="Previous image"
           >
-            <ChevronLeft className="text-white" size={24} />
+            <ChevronLeft className="text-black" size={24} />
           </button>
           <button
-            onClick={nextImage}
+            onClick={nextSlide}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
             aria-label="Next image"
           >
-            <ChevronRight className="text-white" size={24} />
+            <ChevronRight className="text-black" size={24} />
           </button>
 
           {/* Navigation Dots */}
@@ -115,13 +215,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
             {product.images.map((_: any, index: number) => (
               <button
                 key={index}
-                onClick={() => setCurrentImage(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentImage
-                    ? 'bg-white scale-110'
-                    : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                onClick={() => goToSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? 'bg-white scale-170'
+                    : 'bg-white bg-opacity-70 hover:bg-opacity-85'
                 }`}
-                aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>

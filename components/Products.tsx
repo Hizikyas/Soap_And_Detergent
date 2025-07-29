@@ -15,7 +15,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
   const products = [
     {
       id: 1,
-      slug: 'Ultra Clean Detergent',
+      slug: 'ultra-clean-detergent',
       name: 'Ultra Clean Detergent',
       category: 'Laundry',
       image1: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
@@ -23,7 +23,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 2,
-      slug: 'Gentle Care Soap',
+      slug: 'gentle-care-soap',
       name: 'Gentle Care Soap',
       category: 'Personal Care',
       image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
@@ -31,7 +31,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 3,
-      slug: 'Kitchen Degreaser',
+      slug: 'kitchen-degreaser',
       name: 'Kitchen Degreaser',
       category: 'Kitchen',
       image1: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
@@ -39,7 +39,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 4,
-      slug: 'Multi-Surface Cleaner',
+      slug: 'multi-surface-cleaner',
       name: 'Multi-Surface Cleaner',
       category: 'All-Purpose',
       image1: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
@@ -47,7 +47,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 5,
-      slug: 'Eco-Friendly Line',
+      slug: 'eco-friendly-line',
       name: 'Eco-Friendly Line',
       category: 'Sustainable',
       image1: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
@@ -55,7 +55,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 6,
-      slug: 'Premium Fabric Care',
+      slug: 'premium-fabric-care',
       name: 'Premium Fabric Care',
       category: 'Delicate',
       image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
