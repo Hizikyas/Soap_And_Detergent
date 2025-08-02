@@ -78,7 +78,7 @@ const StoresMapSection: React.FC<{ stores: Store[]; darkMode: boolean; hoveredSt
               <b>{store.name}</b>
               <br />
               {store.address}
-              <br />
+              <br />add 
               {store.phone}
               <br />
               {store.hours}
