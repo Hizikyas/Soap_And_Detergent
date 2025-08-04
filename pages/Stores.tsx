@@ -1,46 +1,150 @@
+'use client';
+import { useState, useEffect, memo } from 'react';
 import { MapPin, Phone, Clock } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+// Dynamically import react-leaflet components
+const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
 
 interface StoresProps {
   darkMode: boolean;
 }
 
+interface Store {
+  id: number;
+  name: string;
+  address: string;
+  phone: string;
+  hours: string;
+  lat: number;
+  lng: number;
+}
+
+// Custom MapSection for Stores
+const StoresMapSection: React.FC<{ stores: Store[]; darkMode: boolean; hoveredStore: number | null }> = ({
+  stores,
+  darkMode,
+  hoveredStore,
+}) => {
+  // Center map on Addis Ababa
+  const position: [number, number] = [9.03, 38.76];
+
+  // Map tile style
+  const mapStyle = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  // Fix default marker icon
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      });
+    }
+  }, []);
+
+  return (
+    <div className={`h-96 rounded-lg overflow-hidden shadow-lg transition-colors duration-300 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
+      <MapContainer
+        center={position}
+        zoom={12}
+        style={{ height: '100%', width: '100%' }}
+        className="z-10"
+        attributionControl={false}
+        scrollWheelZoom={false}
+      >
+        <TileLayer url={mapStyle} />
+        {stores.map((store) => (
+          <Marker
+            key={store.id}
+            position={[store.lat, store.lng]}
+            icon={L.icon({
+              iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+              shadowSize: [41, 41],
+              className: hoveredStore === store.id ? 'marker-highlight' : '',
+            })}
+          >
+            <Popup>
+              <b>{store.name}</b>
+              <br />
+              {store.address}
+              <br />add 
+              {store.phone}
+              <br />
+              {store.hours}
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
+  );
+};
+
 const Stores: React.FC<StoresProps> = ({ darkMode }) => {
-  const stores = [
+  const stores: Store[] = [
     {
       id: 1,
-      name: 'CleanCo Downtown',
-      address: '123 Main Street, Downtown, SC 12345',
-      phone: '+1 (555) 123-4567',
-      hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-6PM'
+      name: 'CleanCo Bole',
+      address: 'Bole Road, Bole, Addis Ababa, Ethiopia',
+      phone: '+251 911 123 456',
+      hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-6PM',
+      lat: 9.0064,
+      lng: 38.7766,
     },
     {
       id: 2,
-      name: 'CleanCo Mall Plaza',
-      address: '456 Shopping Center Blvd, Mall Plaza, SC 12346',
-      phone: '+1 (555) 234-5678',
-      hours: 'Mon-Sat: 10AM-9PM, Sun: 11AM-7PM'
+      name: 'CleanCo Piazza',
+      address: 'Churchill Avenue, Piazza, Addis Ababa, Ethiopia',
+      phone: '+251 922 234 567',
+      hours: 'Mon-Sat: 10AM-9PM, Sun: 11AM-7PM',
+      lat: 9.0330,
+      lng: 38.7522,
     },
     {
       id: 3,
-      name: 'CleanCo Westside',
-      address: '789 West Avenue, Westside, SC 12347',
-      phone: '+1 (555) 345-6789',
-      hours: 'Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM'
+      name: 'CleanCo Mexico Square',
+      address: 'Mexico Square, Lideta, Addis Ababa, Ethiopia',
+      phone: '+251 933 345 678',
+      hours: 'Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM',
+      lat: 9.0101,
+      lng: 38.7384,
     },
     {
       id: 4,
-      name: 'CleanCo Northgate',
-      address: '321 North Gate Drive, Northgate, SC 12348',
-      phone: '+1 (555) 456-7890',
-      hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-5PM'
-    }
+      name: 'CleanCo CMC',
+      address: 'CMC Road, Yeka, Addis Ababa, Ethiopia',
+      phone: '+251 944 456 789',
+      hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-5PM',
+      lat: 9.0148,
+      lng: 38.8201,
+    },
   ];
+
+  const [hoveredStore, setHoveredStore] = useState<number | null>(null);
+
+  // Debug log to detect multiple renders
+  useEffect(() => {
+    console.log('Stores component mounted');
+    return () => {
+      console.log('Stores component unmounted');
+    };
+  }, []);
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Page Title */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-[3rem]">
           <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block transition-colors duration-300`}>
             Stores
             <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-20 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
@@ -48,37 +152,22 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
         </div>
 
         {/* Interactive Map */}
-        <div className="mb-12">
-          <div className={`w-full h-96 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'} rounded-lg shadow-lg flex items-center justify-center relative overflow-hidden transition-colors duration-300`}>
-            <div className="text-center">
-              <MapPin className={`mx-auto mb-4 ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`} size={48} />
-              <p className={`text-lg ${darkMode ? 'text-gray-300' : 'text-gray-600'} transition-colors duration-300`}>
-                Interactive Map
-              </p>
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'} transition-colors duration-300`}>
-                Store locations with red markers
-              </p>
-            </div>
-            
-            {/* Simulated Map Markers */}
-            <div className="absolute top-16 left-20 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-            <div className="absolute top-32 right-24 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-20 left-32 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-24 right-20 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
-          </div>
+        <div className="mb-[5rem]">
+          <StoresMapSection stores={stores} darkMode={darkMode} hoveredStore={hoveredStore} />
         </div>
 
         {/* Store List */}
         <div className="grid md:grid-cols-2 gap-8">
-          {stores.map((store) => (
-            <div 
+          {stores.map((store, index) => (
+            <div
               key={store.id}
-              className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105`}
+              className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:bg-opacity-90 opacity-0 animate-[fadeInUp_0.5s_ease-out_forwards] delay-${index * 100}`}
+              onMouseEnter={() => setHoveredStore(store.id)}
+              onMouseLeave={() => setHoveredStore(null)}
             >
               <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-4 transition-colors duration-300`}>
                 {store.name}
               </h3>
-              
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <MapPin className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={16} />
@@ -86,14 +175,12 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
                     {store.address}
                   </span>
                 </div>
-                
                 <div className="flex items-center gap-3">
                   <Phone className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={16} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
                     {store.phone}
                   </span>
                 </div>
-                
                 <div className="flex items-start gap-3">
                   <Clock className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={16} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
@@ -105,8 +192,41 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
           ))}
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .delay-0 {
+          animation-delay: 0ms;
+        }
+        .delay-100 {
+          animation-delay: 100ms;
+        }
+        .delay-200 {
+          animation-delay: 200ms;
+        }
+        .delay-300 {
+          animation-delay: 300ms;
+        }
+        .leaflet-container {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.5rem;
+        }
+        .marker-highlight {
+          filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+        }
+      `}</style>
     </div>
   );
 };
 
-export default Stores;
+export default memo(Stores);
