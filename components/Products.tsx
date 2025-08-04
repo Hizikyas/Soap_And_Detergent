@@ -1,16 +1,37 @@
 'use client';
-
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Loader from '../components/Loading';
 
 interface ProductsProps {
   darkMode: boolean;
 }
 
 const Products: React.FC<ProductsProps> = ({ darkMode }) => {
+  const pathname = usePathname();
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Reset loading state when navigation completes
+  useEffect(() => {
+    setLoading(false);
+  }, [pathname]);
+
+  // Handle link click to trigger loader
+  const handleLinkClick = () => {
+    setLoading(true);
+  };
+
+  // Debug log for component mount
+  useEffect(() => {
+    console.log('ProductsSection component mounted');
+    return () => {
+      console.log('ProductsSection component unmounted');
+    };
+  }, []);
 
   const products = [
     {
@@ -19,7 +40,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Ultra Clean Detergent',
       category: 'Laundry',
       image1: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
+      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
     },
     {
       id: 2,
@@ -27,7 +48,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Gentle Care Soap',
       category: 'Personal Care',
       image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
+      image2: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
     },
     {
       id: 3,
@@ -35,7 +56,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Kitchen Degreaser',
       category: 'Kitchen',
       image1: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
+      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
     },
     {
       id: 4,
@@ -43,7 +64,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Multi-Surface Cleaner',
       category: 'All-Purpose',
       image1: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
+      image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
     },
     {
       id: 5,
@@ -51,7 +72,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Eco-Friendly Line',
       category: 'Sustainable',
       image1: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
+      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
     },
     {
       id: 6,
@@ -59,12 +80,27 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Premium Fabric Care',
       category: 'Delicate',
       image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1'
-    }
+      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    },
   ];
 
   return (
     <section className={`py-16 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors duration-300`} id="products">
+      {/* Loader with Blurred Background */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
+          >
+            <Loader darkMode={darkMode} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -99,7 +135,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   className="absolute inset-0 w-full h-full object-cover"
                   animate={{
                     opacity: hoveredProduct === product.id ? 0 : 1,
-                    scale: hoveredProduct === product.id ? 1.1 : 1
+                    scale: hoveredProduct === product.id ? 1.1 : 1,
                   }}
                   transition={{ duration: 0.5 }}
                 />
@@ -111,7 +147,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   className="absolute inset-0 w-full h-full object-cover"
                   animate={{
                     opacity: hoveredProduct === product.id ? 1 : 0,
-                    scale: hoveredProduct === product.id ? 1 : 1.1
+                    scale: hoveredProduct === product.id ? 1 : 1.1,
                   }}
                   transition={{ duration: 0.5 }}
                 />
@@ -129,14 +165,14 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   animate={{
                     opacity: hoveredProduct === product.id ? 1 : 0,
                     y: hoveredProduct === product.id ? 0 : 20,
-                    scale: hoveredProduct === product.id ? 1 : 0.95
+                    scale: hoveredProduct === product.id ? 1 : 0.95,
                   }}
                   transition={{ duration: 0.3 }}
                 >
                   <h3 className="text-white text-xl font-bold mb-2 text-center px-4">
                     {product.name}
                   </h3>
-                  <Link href={`/products/${product.slug}`}>
+                  <Link href={`/products/${product.slug}`} onClick={handleLinkClick}>
                     <button className="bg-white text-[#A31621] px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 hover:scale-105 flex items-center gap-2">
                       <Eye size={16} />
                       View

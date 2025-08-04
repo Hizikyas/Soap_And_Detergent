@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import Loader from '../components/Loading';
 
 interface ProductDetailProps {
   productName: string;
@@ -11,9 +13,11 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = false }) => {
+  const pathname = usePathname();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const productData = {
     'ultra-clean-detergent': {
@@ -115,6 +119,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     }),
   };
 
+  // Auto-slide when not hovered
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (!isHovered) {
@@ -126,6 +131,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     return () => clearInterval(timer);
   }, [product.images.length, isHovered]);
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -136,7 +142,20 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  });
+  }, []);
+
+  // Reset loading state when navigation completes
+  useEffect(() => {
+    setLoading(false);
+  }, [pathname]);
+
+  // Debug log for component mount
+  useEffect(() => {
+    console.log('ProductDetail component mounted');
+    return () => {
+      console.log('ProductDetail component unmounted');
+    };
+  }, []);
 
   const nextSlide = () => {
     setDirection(1);
@@ -153,92 +172,115 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     setCurrentSlide(index);
   };
 
+  // Handle link click to trigger loader
+  const handleLinkClick = () => {
+    setLoading(true);
+  };
+
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
-        {/* Go Back Icon and Text */}
-        <Link
-          href="/products"
-          className="absolute top-16 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
-          aria-label="Go back to products"
-        >
-          <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
-          <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
-        </Link>
+    <>
+      {/* Loader with Blurred Background */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
+          >
+            <Loader darkMode={darkMode} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Product Image Carousel */}
-        <div
-          className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12 mt-16"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={currentSlide}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
-                opacity: { duration: 0.8 },
-              }}
-              className="absolute inset-0"
+      <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+          {/* Go Back Icon and Text */}
+          <Link
+            href="/products"
+            onClick={handleLinkClick}
+            className="absolute top-16 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
+            aria-label="Go back to products"
+          >
+            <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
+            <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
+          </Link>
+
+          {/* Product Image Carousel */}
+          <div
+            className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12 mt-16"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={currentSlide}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
+                  opacity: { duration: 0.8 },
+                }}
+                className="absolute inset-0"
+              >
+                <img
+                  src={product.images[currentSlide]}
+                  alt={`${product.name} - View ${currentSlide + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
+              aria-label="Previous image"
             >
-              <img
-                src={product.images[currentSlide]}
-                alt={`${product.name} - View ${currentSlide + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </AnimatePresence>
+              <ChevronLeft className="text-black" size={24} />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
+              aria-label="Next image"
+            >
+              <ChevronRight className="text-black" size={24} />
+            </button>
 
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
-            aria-label="Previous image"
-          >
-            <ChevronLeft className="text-black" size={24} />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
-            aria-label="Next image"
-          >
-            <ChevronRight className="text-black" size={24} />
-          </button>
+            {/* Navigation Dots */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {product.images.map((_: any, index: number) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? 'bg-white scale-170'
+                      : 'bg-white bg-opacity-70 hover:bg-opacity-85'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
 
-          {/* Navigation Dots */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {product.images.map((_: any, index: number) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide
-                    ? 'bg-white scale-170'
-                    : 'bg-white bg-opacity-70 hover:bg-opacity-85'
-                }`}
-              />
-            ))}
+          {/* Product Information */}
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block mb-8 transition-colors duration-300`}>
+              {product.name}
+              <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-24 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
+            </h1>
+            
+            <p className={`text-lg md:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
+              {product.description}
+            </p>
           </div>
         </div>
-
-        {/* Product Information */}
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block mb-8 transition-colors duration-300`}>
-            {product.name}
-            <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-24 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
-          </h1>
-          
-          <p className={`text-lg md:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-            {product.description}
-          </p>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 
