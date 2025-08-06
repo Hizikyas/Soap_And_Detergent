@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import Loader from '../components/Loading';
 
@@ -13,6 +13,7 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = false }) => {
+  const router = useRouter();
   const pathname = usePathname();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -177,6 +178,14 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     setLoading(true);
   };
 
+  // Handle go back button click
+  const handleGoBack = () => {
+    setLoading(true);
+    setTimeout(() => {
+      router.back();
+    }, 200); // Optional: delay for loader animation
+  };
+
   return (
     <>
       {/* Loader with Blurred Background */}
@@ -197,15 +206,15 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
           {/* Go Back Icon and Text */}
-          <Link
-            href="/products"
-            onClick={handleLinkClick}
+          <button
+            onClick={handleGoBack}
             className="absolute top-16 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
-            aria-label="Go back to products"
+            aria-label="Go back to previous page"
+            type="button"
           >
             <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
             <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
-          </Link>
+          </button>
 
           {/* Product Image Carousel */}
           <div

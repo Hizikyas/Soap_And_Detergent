@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { Mail, Phone, Globe, MapPin } from 'lucide-react';
 
@@ -12,6 +14,8 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
     phone: '',
     message: ''
   });
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -21,12 +25,43 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ fullName: '', email: '', phone: '', message: '' });
+    setError('');
+    setIsSubmitting(true);
+
+    if (!formData.fullName || !formData.email || !formData.message) {
+      setError('Please fill out all required fields.');
+      setIsSubmitting(false);
+      return;
+    }
+    if (formData.message.length > 1000) {
+      setError('Message must be 1000 characters or less.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      alert('Thank you for your message! It has been sent to our team.');
+      setFormData({ fullName: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      setError('Failed to send your message. Please try again later.');
+      console.error('Error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -209,11 +244,18 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
                 />
               </div>
 
+              {error && (
+                <p className={`text-sm ${darkMode ? 'text-red-400' : 'text-red-600'}`}>
+                  {error}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-[#A31621] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#7a1018] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                disabled={isSubmitting}
+                className={`w-full ${isSubmitting ? 'bg-gray-500' : 'bg-[#A31621]'} text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 ${!isSubmitting && 'hover:bg-[#7a1018] hover:scale-105 hover:shadow-lg'}`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
