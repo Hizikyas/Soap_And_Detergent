@@ -113,7 +113,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
             </div>
 
             {/* General Enquiries */}
-            <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
+            {/* <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
               <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-6 transition-colors duration-300`}>
                 General Enquiries
               </h2>
@@ -144,7 +144,8 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
                   </span>
                 </div>
               </div>
-            </div>
+            </div> */}
+
           </div>
 
           {/* Right Side - Contact Form */}

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { FaXTwitter } from "react-icons/fa6";
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -175,23 +176,23 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                     <a
                       href="#"
                       aria-label="Facebook"
-                      className="inline-block transform hover:translate-x-2 transition-all duration-300 linear"
+                      className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
                       <Facebook className="text-gray-300 hover:text-blue-400 cursor-pointer" size={20} />
                     </a>
                     <a
                       href="#"
                       aria-label="Twitter"
-                      className="inline-block transform hover:translate-x-2 transition-all duration-300 linear"
+                      className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
-                      <Twitter className="text-gray-300 hover:text-blue-400 cursor-pointer" size={20} />
+                      <FaXTwitter className="text-gray-300 hover:text-black cursor-pointer" size={20} />
                     </a>
                     <a
                       href="#"
                       aria-label="Instagram"
-                      className="inline-block transform hover:translate-x-2 transition-all duration-300 linear"
+                      className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
-                      <Instagram className="text-gray-300 hover:text-pink-400 cursor-pointer" size={20} />
+                      <Instagram className="text-gray-300 hover:text-orange-300 cursor-pointer" size={20} />
                     </a>
                   </div>
                 </div>
