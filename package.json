@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/dotenv": "^8.2.3",
     "axios": "^1.10.0",
     "dotenv": "^17.2.1",
     "framer-motion": "^12.23.7",
