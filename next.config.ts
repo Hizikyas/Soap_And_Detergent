@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   // Performance optimizations
@@ -19,6 +20,13 @@ const nextConfig: NextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
+  } ,
+    webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'leaflet': path.resolve(__dirname, 'node_modules/leaflet')
+    };
+    return config;
   } ,
   // Enable static optimization
   trailingSlash: false,

@@ -2,14 +2,39 @@
 import { useState, useEffect, memo } from 'react';
 import { MapPin, Phone, Clock } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 
-// Dynamically import react-leaflet components
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import('react-leaflet').then((mod) => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });
+// Load Leaflet CSS only on client-side
+if (typeof window !== 'undefined') {
+  require('leaflet/dist/leaflet.css');
+}
+
+// Dynamic imports with SSR disabled
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+        <p>Loading map...</p>
+      </div>
+    )
+  }
+);
+
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+
+const Popup = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Popup),
+  { ssr: false }
+);
 
 interface StoresProps {
   darkMode: boolean;
@@ -25,21 +50,22 @@ interface Store {
   lng: number;
 }
 
-// Custom MapSection for Stores
-const StoresMapSection: React.FC<{ stores: Store[]; darkMode: boolean; hoveredStore: number | null }> = ({
+const StoresMapSection = ({
   stores,
   darkMode,
   hoveredStore,
+}: {
+  stores: Store[];
+  darkMode: boolean;
+  hoveredStore: number | null;
 }) => {
-  // Center map on Addis Ababa
   const position: [number, number] = [9.03, 38.76];
-
-  // Map tile style
   const mapStyle = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-  // Fix default marker icon
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const L = require('leaflet');
+      // Fix for default marker icons
       delete (L.Icon.Default.prototype as any)._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -49,8 +75,22 @@ const StoresMapSection: React.FC<{ stores: Store[]; darkMode: boolean; hoveredSt
     }
   }, []);
 
+  if (typeof window === 'undefined') {
+    return (
+      <div className={`h-96 rounded-lg overflow-hidden shadow-lg ${
+        darkMode ? 'bg-gray-800' : 'bg-gray-200'
+      } flex items-center justify-center`}>
+        <p>Loading map...</p>
+      </div>
+    );
+  }
+
+  const L = require('leaflet');
+
   return (
-    <div className={`h-96 rounded-lg overflow-hidden shadow-lg transition-colors duration-300 ${darkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
+    <div className={`h-96 rounded-lg overflow-hidden shadow-lg ${
+      darkMode ? 'bg-gray-800' : 'bg-gray-200'
+    }`}>
       <MapContainer
         center={position}
         zoom={12}
@@ -78,7 +118,7 @@ const StoresMapSection: React.FC<{ stores: Store[]; darkMode: boolean; hoveredSt
               <b>{store.name}</b>
               <br />
               {store.address}
-              <br />add 
+              <br />
               {store.phone}
               <br />
               {store.hours}
@@ -132,58 +172,68 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
 
   const [hoveredStore, setHoveredStore] = useState<number | null>(null);
 
-  // Debug log to detect multiple renders
-  useEffect(() => {
-    console.log('Stores component mounted');
-    return () => {
-      console.log('Stores component unmounted');
-    };
-  }, []);
-
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Page Title */}
         <div className="text-center mb-[3rem]">
-          <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block transition-colors duration-300`}>
+          <h1 className={`text-4xl md:text-5xl font-bold ${
+            darkMode ? 'text-white' : 'text-[#A31621]'
+          } relative inline-block`}>
             Stores
-            <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-20 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
+            <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-20 h-0.5 ${
+              darkMode ? 'bg-white' : 'bg-[#A31621]'
+            }`}></div>
           </h1>
         </div>
 
-        {/* Interactive Map */}
         <div className="mb-[5rem]">
           <StoresMapSection stores={stores} darkMode={darkMode} hoveredStore={hoveredStore} />
         </div>
 
-        {/* Store List */}
         <div className="grid md:grid-cols-2 gap-8">
           {stores.map((store, index) => (
             <div
               key={store.id}
-              className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:bg-opacity-90 opacity-0 animate-[fadeInUp_0.5s_ease-out_forwards] delay-${index * 100}`}
+              className={`${
+                darkMode ? 'bg-gray-800' : 'bg-white'
+              } p-6 rounded-lg shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 hover:bg-opacity-90 opacity-0 animate-[fadeInUp_0.5s_ease-out_forwards]`}
+              style={{ animationDelay: `${index * 100}ms` }}
               onMouseEnter={() => setHoveredStore(store.id)}
               onMouseLeave={() => setHoveredStore(null)}
             >
-              <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-4 transition-colors duration-300`}>
+              <h3 className={`text-xl font-bold ${
+                darkMode ? 'text-white' : 'text-[#A31621]'
+              } mb-4`}>
                 {store.name}
               </h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <MapPin className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={16} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
+                  <MapPin className={`${
+                    darkMode ? 'text-gray-400' : 'text-gray-600'
+                  } mt-1`} size={16} />
+                  <span className={`${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                     {store.address}
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={16} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
+                  <Phone className={`${
+                    darkMode ? 'text-gray-400' : 'text-gray-600'
+                  }`} size={16} />
+                  <span className={`${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                     {store.phone}
                   </span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Clock className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={16} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
+                  <Clock className={`${
+                    darkMode ? 'text-gray-400' : 'text-gray-600'
+                  } mt-1`} size={16} />
+                  <span className={`${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
                     {store.hours}
                   </span>
                 </div>
@@ -203,18 +253,6 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-        .delay-0 {
-          animation-delay: 0ms;
-        }
-        .delay-100 {
-          animation-delay: 100ms;
-        }
-        .delay-200 {
-          animation-delay: 200ms;
-        }
-        .delay-300 {
-          animation-delay: 300ms;
         }
         .leaflet-container {
           width: 100%;
