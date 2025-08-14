@@ -5,11 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
-import Loader from '../components/Loading';
 
 interface ProductDetailProps {
   productName: string;
   darkMode?: boolean;
+}
+
+interface ProductData {
+  name: string;
+  description: string;
+  images: string[];
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = false }) => {
@@ -18,9 +23,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  const productData = {
+  const productData: Record<string, ProductData> = {
     'ultra-clean-detergent': {
       name: 'Ultra Clean Detergent',
       description: 'Our premium laundry detergent delivers exceptional cleaning power while being gentle on fabrics. Formulated with advanced enzymes and biodegradable surfactants, it effectively removes tough stains and odors while maintaining the integrity of your clothes. Suitable for all water temperatures and fabric types, this concentrated formula provides excellent value with fewer doses needed per load.',
@@ -145,9 +150,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Reset loading state when navigation completes
+  // Handle navigation state
   useEffect(() => {
-    setLoading(false);
+    setIsNavigating(false);
   }, [pathname]);
 
   // Debug log for component mount
@@ -173,33 +178,26 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     setCurrentSlide(index);
   };
 
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
-  };
-
   // Handle go back button click
   const handleGoBack = () => {
-    setLoading(true);
+    setIsNavigating(true);
     setTimeout(() => {
       router.back();
-    }, 200); // Optional: delay for loader animation
+    }, 200);
   };
 
   return (
     <>
-      {/* Loader with Blurred Background */}
+      {/* Simple Navigation Loading Indicator */}
       <AnimatePresence>
-        {loading && (
+        {isNavigating && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
+            className="fixed top-0 left-0 h-1 bg-[#A31621] z-50"
+          />
         )}
       </AnimatePresence>
 
