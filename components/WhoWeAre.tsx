@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Loader from '../components/Loading';
 
 interface WhoWeAreProps {
   darkMode: boolean;
@@ -11,16 +10,15 @@ interface WhoWeAreProps {
 
 const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
   const pathname = usePathname();
-  const [loading, setLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // Reset loading state when navigation completes
+  // Handle navigation state
   useEffect(() => {
-    setLoading(false);
+    setIsNavigating(false);
   }, [pathname]);
 
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
+  const handleNavigation = () => {
+    setIsNavigating(true);
   };
 
   // Debug log for component mount
@@ -33,18 +31,16 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
 
   return (
     <>
-      {/* Loader with Blurred Background */}
+      {/* Simple Navigation Loading Indicator */}
       <AnimatePresence>
-        {loading && (
+        {isNavigating && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
+            className="fixed top-0 left-0 h-1 bg-[#A31621] z-50"
+          />
         )}
       </AnimatePresence>
 
@@ -101,22 +97,28 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
                   darkMode ? 'text-gray-300' : 'text-[#A31621]'
                 } transition-colors duration-300`}
               >
-                From our state-of-the-art manufacturing facilities to our rigorous quality control processes,
-                every step reflects our dedication to creating the finest soap and detergent products available.
+                From our state-of-the-art research facilities to our eco-friendly manufacturing processes,
+                every aspect of our business reflects our dedication to quality, sustainability, and
+                customer satisfaction.
               </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`${
-                  darkMode
-                    ? 'bg-white text-gray-800 hover:bg-gray-200'
-                    : 'bg-[#A31621] text-white hover:bg-[#7a1018]'
-                } px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg`}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
               >
-                <Link href="/learn_more" onClick={handleLinkClick}>
+                <Link
+                  href="/learn_more"
+                  onClick={handleNavigation}
+                  className={`inline-block px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 ${
+                    darkMode
+                      ? 'bg-white text-gray-900 hover:bg-gray-100'
+                      : 'bg-[#A31621] text-white hover:bg-[#7a1018]'
+                  }`}
+                >
                   Learn More
                 </Link>
-              </motion.button>
+              </motion.div>
             </motion.div>
 
             {/* Right Column - Image */}
@@ -134,18 +136,6 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
                   className="w-full h-80 object-cover"
                 />
               </div>
-
-              {/* Decorative Circles */}
-              {/* <div
-                className={`absolute -bottom-6 -right-6 w-24 h-24 rounded-full opacity-20 ${
-                  darkMode ? 'bg-white' : 'bg-[#A31621]'
-                }`}
-              ></div>
-              <div
-                className={`absolute -top-6 -left-6 w-16 h-16 rounded-full opacity-15 ${
-                  darkMode ? 'bg-white' : 'bg-[#A31621]'
-                }`}
-              ></div> */}
             </motion.div>
           </div>
         </div>

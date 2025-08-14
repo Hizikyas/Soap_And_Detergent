@@ -4,7 +4,7 @@ import React from "react";
 import Carousel from "../components/Carousel";
 import WhoWeAre from "../components/WhoWeAre";
 import Products from "../components/Products";
-import { useDarkMode } from "./layout";
+import { useDarkMode } from "../components/ClientProvider";
 
 export default function Home() {
   const { darkMode } = useDarkMode();

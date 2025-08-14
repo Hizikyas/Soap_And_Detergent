@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import MapSection from './MapSection';
-import Loader from '../components/Loading';
 
 interface FooterProps {
   darkMode: boolean;
@@ -14,16 +13,15 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ darkMode }) => {
   const pathname = usePathname();
-  const [loading, setLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // Reset loading state when navigation completes
+  // Handle navigation state
   useEffect(() => {
-    setLoading(false);
+    setIsNavigating(false);
   }, [pathname]);
 
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
+  const handleNavigation = () => {
+    setIsNavigating(true);
   };
 
   // Debug log for component mount
@@ -36,18 +34,16 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
 
   return (
     <>
-      {/* Loader with Blurred Background */}
+      {/* Simple Navigation Loading Indicator */}
       <AnimatePresence>
-        {loading && (
+        {isNavigating && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
+            className="fixed top-0 left-0 h-1 bg-[#A31621] z-50"
+          />
         )}
       </AnimatePresence>
 
@@ -72,7 +68,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <li>
                     <Link
                       href="/"
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-300 linear"
                     >
                       Home
@@ -81,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <li>
                     <Link
                       href="/products"
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-300 linear"
                     >
                       Products
@@ -90,7 +86,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <li>
                     <Link
                       href="/stores"
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-300 linear"
                     >
                       Store
@@ -99,7 +95,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <li>
                     <Link
                       href="/about_us"
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-300 linear"
                     >
                       About Us
@@ -108,7 +104,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <li>
                     <Link
                       href="/contact_us"
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-2 transition-all duration-300 linear"
                     >
                       Contact
@@ -205,7 +201,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               © 2025 CleanCo. All rights reserved. |{' '}
               <Link
                 href="/privacy"
-                onClick={handleLinkClick}
+                onClick={handleNavigation}
                 className="hover:text-white transition-colors duration-300"
               >
                 Privacy Policy
@@ -213,7 +209,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
               |{' '}
               <Link
                 href="/terms"
-                onClick={handleLinkClick}
+                onClick={handleNavigation}
                 className="hover:text-white transition-colors duration-300"
               >
                 Terms of Service

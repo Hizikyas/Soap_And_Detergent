@@ -4,7 +4,6 @@ import { Home, Package, Store, Users, Phone, Sun, Moon, Menu, X } from 'lucide-r
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import Loader from '../components/Loading';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -16,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   // Helper function to determine if a link is active
   const isActive = (href: string) => {
@@ -39,14 +38,13 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  // Reset loading state when navigation completes
+  // Handle navigation state
   useEffect(() => {
-    setLoading(false);
+    setIsNavigating(false);
   }, [pathname]);
 
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
+  const handleNavigation = () => {
+    setIsNavigating(true);
     setIsMenuOpen(false);
   };
 
@@ -72,18 +70,16 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <>
-      {/* Loader with Blurred Background */}
+      {/* Simple Navigation Loading Indicator */}
       <AnimatePresence>
-        {loading && (
+        {isNavigating && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
+            className="fixed top-0 left-0 h-1 bg-[#A31621] z-50"
+          />
         )}
       </AnimatePresence>
 
@@ -99,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
             <div className="flex items-center">
               <Link
                 href="/"
-                onClick={handleLinkClick}
+                onClick={handleNavigation}
                 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
               >
                 CleanCo
@@ -113,7 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={handleLinkClick}
+                    onClick={handleNavigation}
                     className={`${isActive(link.href) ? (darkMode ? 'text-[#ed4250]' : 'text-black') : (darkMode ? 'text-gray-400 hover:text-white' : 'text-[#a31622c0] hover:text-[#7a1018]')} px-3 py-2 text-sm font-medium transition-colors duration-300 flex items-center gap-2`}
                   >
                     <link.icon size={16} />
@@ -155,7 +151,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
                     <Link
                       key={link.href}
                       href={link.href}
-                      onClick={handleLinkClick}
+                      onClick={handleNavigation}
                       className={`${isActive(link.href) ? (darkMode ? 'text-white bg-gray-700' : 'text-[#7a1018] bg-gray-100') : (darkMode ? 'text-gray-300 hover:bg-gray-700 hover:text-white' : 'text-[#A31621] hover:bg-gray-100 hover:text-[#7a1018]')} block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 flex items-center gap-2`}
                     >
                       <link.icon size={16} />

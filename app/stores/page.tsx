@@ -1,5 +1,5 @@
 'use client';
-import { useDarkMode } from '../layout';
+import { useDarkMode } from '../../components/ClientProvider';
 import Stores from '../../pages/Stores';
 
 export default function StoresPage() {

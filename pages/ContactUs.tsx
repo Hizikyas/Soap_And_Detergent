@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Mail, Phone, Globe, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ContactUsProps {
   darkMode: boolean;
@@ -68,18 +69,33 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Page Title */}
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block transition-colors duration-300`}>
             Contact Us
             <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-28 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
           </h1>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left Side - Contact Information */}
-          <div className="space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-8"
+          >
             {/* Sales Queries */}
-            <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}
+            >
               <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-6 transition-colors duration-300`}>
                 Sales Queries
               </h2>
@@ -110,7 +126,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* General Enquiries */}
             {/* <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
@@ -146,10 +162,15 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
               </div>
             </div> */}
 
-          </div>
+          </motion.div>
 
           {/* Right Side - Contact Form */}
-          <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}
+          >
             <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-6 transition-colors duration-300`}>
               Send us a Message
             </h2>
@@ -259,7 +280,7 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

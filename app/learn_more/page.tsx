@@ -1,5 +1,5 @@
 'use client';
-import { useDarkMode } from '../layout';
+import { useDarkMode } from '../../components/ClientProvider';
 import LearnMore from '../../pages/LearnMore';
 
 export default function ReadMorePage() {

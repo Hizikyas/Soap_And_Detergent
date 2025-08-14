@@ -1,6 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { useDarkMode } from '../../layout';
+import { useDarkMode } from '../../../components/ClientProvider';
 import ProductDetail from '../../../pages/ProductDetail';
 
 export default function ProductDetailPage() {

@@ -1,5 +1,5 @@
 'use client';
-import { useDarkMode } from '../layout';
+import { useDarkMode } from '../../components/ClientProvider';
 import ContactUs from '../../pages/ContactUs';
 
 export default function ContactUsPage() {

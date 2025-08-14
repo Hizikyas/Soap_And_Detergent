@@ -1,5 +1,5 @@
 'use client';
-import { useDarkMode } from '../layout';
+import { useDarkMode } from '../../components/ClientProvider';
 import Products from '../../pages/Products';
 
 export default function ProductsPage() {

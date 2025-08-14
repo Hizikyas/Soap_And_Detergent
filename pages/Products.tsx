@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Loader from '../components/Loading';
 
 interface ProductsProps {
   darkMode: boolean;
@@ -13,17 +12,6 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ darkMode }) => {
   const pathname = usePathname();
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  // Reset loading state when navigation completes
-  useEffect(() => {
-    setLoading(false);
-  }, [pathname]);
-
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
-  };
 
   // Debug log for component mount
   useEffect(() => {
@@ -102,40 +90,24 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
-      {/* Loader with Blurred Background */}
-      <AnimatePresence>
-        {loading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 3, ease: 'easeOut' }}
-          viewport={{ once: true }}
-          className="text-center mb-[5rem] transition-opacity transition-transform duration-700 ease-out"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-[5rem]"
         >
           <h1
             className={`text-4xl md:text-5xl font-bold ${
               darkMode ? 'text-white' : 'text-[#A31621]'
-            } relative inline-block transition-colors duration-500 ease-out`}
+            } relative inline-block transition-colors duration-300`}
           >
             Products
             <div
               className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-24 h-0.5 ${
                 darkMode ? 'bg-white' : 'bg-[#A31621]'
-              } transition-colors duration-500 ease-out`}
+              } transition-colors duration-300`}
             ></div>
           </h1>
         </motion.div>
@@ -147,8 +119,8 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
               key={product.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-50px" }}
               className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg"
               onMouseEnter={() => setHoveredProduct(product.id)}
               onMouseLeave={() => setHoveredProduct(null)}
@@ -199,7 +171,6 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   </h3>
                   <Link
                     href={`/products/${product.slug}`}
-                    onClick={handleLinkClick}
                     className="bg-white text-[#A31621] px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 hover:scale-105 flex items-center gap-2"
                   >
                     <Eye size={16} />

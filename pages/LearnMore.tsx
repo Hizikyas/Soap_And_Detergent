@@ -55,20 +55,29 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="grid lg:grid-cols-2 gap-12 items-center mb-16"
         >
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative rounded-2xl overflow-hidden shadow-2xl"
+          >
             <img
               src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
               alt="CEO Portrait"
               className="w-full h-96 object-cover"
             />
-          </div>
+          </motion.div>
 
-          <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-2xl shadow-xl relative transition-colors duration-300`}>
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-2xl shadow-xl relative transition-colors duration-300`}
+          >
             <Quote className={`${darkMode ? 'text-gray-600' : 'text-gray-300'} absolute top-4 right-4`} size={48} />
             <blockquote className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6 italic`}>
               "CleanCo represents more than just cleaning products — we embody a commitment to excellence, sustainability, and innovation..."
@@ -77,14 +86,14 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
               <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>SARAH JOHNSON</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} font-medium`}>CHIEF EXECUTIVE OFFICER</p>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
           className={`text-3xl md:text-4xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} text-center relative inline-block w-full mb-12`}
         >
           <span className="relative">
@@ -105,8 +114,8 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
               <motion.div
                 initial={{ x: index % 2 === 0 ? -100 : 100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
                 className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}
               >
                 <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-xl shadow-lg`}>
@@ -119,8 +128,8 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
               <motion.div
                 initial={{ x: index % 2 === 0 ? 100 : -100, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true, margin: "-50px" }}
                 className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`}
               >
                 <div className="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
@@ -134,8 +143,8 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          transition={{ staggerChildren: 0.2 }}
-          viewport={{ once: true }}
+          transition={{ staggerChildren: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
           className="grid md:grid-cols-3 gap-8 mt-20"
         >
           {['Quality', 'Innovation', 'Sustainability'].map((value, i) => {
@@ -149,7 +158,8 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
                 key={value}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
                 className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-xl shadow-lg text-center mb-[4rem]`}
               >
                 <div className={`w-16 h-16 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} rounded-full flex items-center justify-center mx-auto mb-4`}>

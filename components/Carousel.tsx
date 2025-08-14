@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Loader from '../components/Loading';
 
 interface CarouselProps {
   darkMode: boolean;
@@ -16,7 +15,7 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const slides = [
     {
@@ -87,10 +86,14 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Reset loading state when navigation completes
+  // Handle navigation state
   useEffect(() => {
-    setLoading(false);
+    setIsNavigating(false);
   }, [pathname]);
+
+  const handleNavigation = () => {
+    setIsNavigating(true);
+  };
 
   // Debug log for component mount
   useEffect(() => {
@@ -115,25 +118,18 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
     setCurrentSlide(index);
   };
 
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
-  };
-
   return (
     <>
-      {/* Loader with Blurred Background */}
+      {/* Simple Navigation Loading Indicator */}
       <AnimatePresence>
-        {loading && (
+        {isNavigating && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            exit={{ width: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
+            className="fixed top-0 left-0 h-1 bg-[#A31621] z-50"
+          />
         )}
       </AnimatePresence>
 
@@ -187,7 +183,7 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
                     >
                       <Link
                         href="/read_more"
-                        onClick={handleLinkClick}
+                        onClick={handleNavigation}
                         className="inline-block mt-6 bg-white text-[#A31621] px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 hover:scale-105"
                       >
                         Read More

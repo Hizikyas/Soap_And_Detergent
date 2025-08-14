@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Eye } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Loader from '../components/Loading';
 
 interface ProductsProps {
   darkMode: boolean;
@@ -13,17 +12,6 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ darkMode }) => {
   const pathname = usePathname();
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  // Reset loading state when navigation completes
-  useEffect(() => {
-    setLoading(false);
-  }, [pathname]);
-
-  // Handle link click to trigger loader
-  const handleLinkClick = () => {
-    setLoading(true);
-  };
 
   // Debug log for component mount
   useEffect(() => {
@@ -86,20 +74,6 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
 
   return (
     <section className={`py-16 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors duration-300`} id="products">
-      {/* Loader with Blurred Background */}
-      <AnimatePresence>
-        {loading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-md z-50 flex items-center justify-center"
-          >
-            <Loader darkMode={darkMode} />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -172,7 +146,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                   <h3 className="text-white text-xl font-bold mb-2 text-center px-4">
                     {product.name}
                   </h3>
-                  <Link href={`/products/${product.slug}`} onClick={handleLinkClick}>
+                  <Link href={`/products/${product.slug}`}>
                     <button className="bg-white text-[#A31621] px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 hover:scale-105 flex items-center gap-2">
                       <Eye size={16} />
                       View
