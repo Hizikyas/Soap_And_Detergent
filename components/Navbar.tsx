@@ -96,9 +96,9 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
               <Link
                 href="/"
                 onClick={handleNavigation}
-                className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
+                // className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
               >
-                CleanCo
+                <img src={'/Logo1.png'} alt="Company Logo" className="h-15 w-auto rounded-[5px]" />
               </Link>
             </div>
 

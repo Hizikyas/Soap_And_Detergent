@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold">CleanCo</h3>
+                  <img src={'/Logo1.png'} alt="Company Logo" className="h-25 w-auto rounded-[5px]" />
               <MapSection darkMode={darkMode} />
               <p className="text-gray-300">
                 Leading the way in innovative cleaning solutions for over 30 years.
