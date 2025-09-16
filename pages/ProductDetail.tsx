@@ -30,76 +30,24 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       name: 'Ultra Clean Detergent',
       description: 'Our premium laundry detergent delivers exceptional cleaning power while being gentle on fabrics. Formulated with advanced enzymes and biodegradable surfactants, it effectively removes tough stains and odors while maintaining the integrity of your clothes. Suitable for all water temperatures and fabric types, this concentrated formula provides excellent value with fewer doses needed per load.',
       images: [
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
-    },
-    'gentle-care-soap': {
-      name: 'Gentle Care Soap',
-      description: 'Experience the perfect balance of cleansing power and skin care with our Gentle Care Soap. Enriched with natural moisturizers and essential oils, this soap cleanses thoroughly while maintaining your skin\'s natural moisture barrier. Free from harsh chemicals and artificial fragrances, it\'s perfect for sensitive skin and daily use by the whole family.',
-      images: [
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+        '/Products/detergent/1.png',
+        '/Products/detergent/2.png'
       ]
     },
     'kitchen-degreaser': {
       name: 'Kitchen Degreaser',
       description: 'Tackle the toughest kitchen grease and grime with our powerful Kitchen Degreaser. This fast-acting formula cuts through baked-on grease, food residue, and stubborn stains on all kitchen surfaces. Safe for use on stainless steel, ceramic, glass, and painted surfaces, it leaves your kitchen sparkling clean without harsh chemical residues.',
       images: [
-        'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
-    },
-    'liquid-detergent': {
-      name: 'Liquid Detergent',
-      description: 'Our premium liquid detergent combines powerful cleaning agents with fabric care technology to deliver outstanding results in every wash. The concentrated formula dissolves quickly in all water temperatures and is specially designed to prevent color fading while removing even the most stubborn stains. Perfect for both standard and high-efficiency washing machines.',
-      images: [
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
-    },
-    'multi-surface-cleaner': {
-      name: 'Multi-Surface Cleaner',
-      description:
-        'Our Multi-Surface Cleaner is your go-to solution for everyday messes on a variety of surfaces. This fast-drying formula effectively lifts dirt, dust, and grime from countertops, tables, appliances, and more. Safe for use on sealed wood, glass, stainless steel, and plastic, it leaves behind a fresh scent and a streak-free shine.',
-      images: [
-        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
-    },
-    'premium-fabric-care': {
-      name: 'Premium Fabric Care',
-      description:
-        'Pamper your delicate fabrics with our Premium Fabric Care solution. Specially formulated for silks, wools, and other fine garments, it gently cleans without fading or stretching. Enriched with fabric conditioners, it maintains softness and extends the life of your clothes. Perfect for hand washing or delicate cycles in your washing machine.',
-      images: [
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
-    },
-    'glass-cleaner-pro': {
-      name: 'Glass Cleaner Pro',
-      description:
-        'Achieve a crystal-clear finish with Glass Cleaner Pro. Designed for windows, mirrors, and glass surfaces, this ammonia-free formula cuts through fingerprints, smudges, and grime with ease. It dries quickly without leaving streaks or residue, making it perfect for both residential and commercial use.',
-      images: [
-        'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
-      ]
+        '/Products/ajax/1.png',
+        '/Products/ajax/2.png']
     },
     'eco-friendly-line': {
       name: 'Eco-Friendly Line',
       description:
         'Our Eco-Friendly Line offers powerful cleaning performance with a conscience. Made with biodegradable ingredients and packaged in recyclable materials, these products are tough on dirt but gentle on the planet. Ideal for environmentally conscious households looking to reduce their footprint without sacrificing cleanliness.',
       images: [
-        'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-        'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1'
+        '/Products/dish/1.png',
+        '/Products/dish/2.png'
       ]
     },
   };

@@ -20,28 +20,28 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
   const slides = [
     {
       id: 1,
-      image: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: '/Carousal/dish.png',
       title: 'Premium Laundry Detergent',
       subtitle: 'Deep cleaning power for all fabrics',
       hasReadMore: true,
     },
     {
       id: 2,
-      image: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: '/Carousal/Detergent.png',
       title: 'Gentle Dish Soap',
       subtitle: 'Tough on grease, gentle on hands',
       hasReadMore: false,
     },
     {
       id: 3,
-      image: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: '/Carousal/Ajax.png',
       title: 'Multi-Surface Cleaner',
       subtitle: 'One solution for every surface',
       hasReadMore: false,
     },
     {
       id: 4,
-      image: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      image: '/Carousal/Cartoon.png',
       title: 'Eco-Friendly Range',
       subtitle: 'Clean conscience, clean home',
       hasReadMore: false,
