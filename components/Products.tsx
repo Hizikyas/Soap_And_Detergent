@@ -23,14 +23,6 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     setIsNavigating(true);
   };
 
-  // Debug log for component mount
-  useEffect(() => {
-    console.log('ProductsSection component mounted');
-    return () => {
-      console.log('ProductsSection component unmounted');
-    };
-  }, []);
-
   const products = [
     {
       id: 1,
@@ -42,17 +34,17 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     },
     {
       id: 2,
-      slug: 'kitchen-degreaser',
-      name: 'Kitchen Degreaser',
+      slug: 'Ajax',
+      name: 'Ajax',
       category: 'Kitchen',
       image1: '/Products/ajax/1.png',
       image2: '/Products/ajax/2.png',
     },
     {
       id: 3,
-      slug: 'eco-friendly-line',
-      name: 'Eco-Friendly Line',
-      category: 'Sustainable',
+      slug: 'dishwashing-detergent',
+      name: 'Dishwashing detergent',
+      category: 'Kitchen',
       image1: '/Products/dish/1.png',
       image2: '/Products/dish/2.png',
     },

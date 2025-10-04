@@ -23,13 +23,6 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
     setIsNavigating(true);
   };
 
-  // Debug log for component mount
-  useEffect(() => {
-    console.log('Products component mounted');
-    return () => {
-      console.log('Products component unmounted');
-    };
-  }, []);
 
   const products = [
     {
@@ -37,65 +30,34 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       name: 'Ultra Clean Detergent',
       category: 'Laundry',
       slug: 'ultra-clean-detergent',
-      image1: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+      image1: '/Products/detergent/1.png',
+      image2: '/Products/detergent/2.png',
     },
     {
       id: 2,
-      name: 'Gentle Care Soap',
-      category: 'Personal Care',
-      slug: 'gentle-care-soap',
-      image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+      name: 'Ajax',
+      category: 'Kitchen',
+      slug: 'Ajax',
+      image1: '/Products/ajax/1.png',
+      image2: '/Products/ajax/2.png',
     },
     {
       id: 3,
-      name: 'Kitchen Degreaser',
+      name: 'Dishwashing detergent',
       category: 'Kitchen',
-      slug: 'kitchen-degreaser',
-      image1: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+      slug: 'dishwashing-detergent',
+      image1: '/Products/dish/1.png',
+      image2: '/Products/dish/2.png',
     },
-    {
-      id: 4,
-      name: 'Multi-Surface Cleaner',
-      category: 'All-Purpose',
-      slug: 'multi-surface-cleaner',
-      image1: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    },
-    {
-      id: 5,
-      name: 'Eco-Friendly Line',
-      category: 'Sustainable',
-      slug: 'eco-friendly-line',
-      image1: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    },
-    {
-      id: 6,
-      name: 'Premium Fabric Care',
-      category: 'Delicate',
-      slug: 'premium-fabric-care',
-      image1: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    },
-    {
-      id: 7,
-      name: 'Liquid Detergent',
-      category: 'Laundry',
-      slug: 'liquid-detergent',
-      image1: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    },
-    {
-      id: 8,
-      name: 'Glass Cleaner Pro',
-      category: 'Specialty',
-      slug: 'glass-cleaner-pro',
-      image1: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-      image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    },
+    // {
+    //   id: 4,
+    //   name: 'Multi-Surface Cleaner',
+    //   category: 'All-Purpose',
+    //   slug: 'multi-surface-cleaner',
+    //   image1: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    //   image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    // },
+
   ];
 
   return (

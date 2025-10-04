@@ -28,23 +28,23 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
   const productData: Record<string, ProductData> = {
     'ultra-clean-detergent': {
       name: 'Ultra Clean Detergent',
-      description: 'Our premium laundry detergent delivers exceptional cleaning power while being gentle on fabrics. Formulated with advanced enzymes and biodegradable surfactants, it effectively removes tough stains and odors while maintaining the integrity of your clothes. Suitable for all water temperatures and fabric types, this concentrated formula provides excellent value with fewer doses needed per load.',
+      description: 'Our locally made laundry detergent provides strong cleaning while being gentle on clothes. It removes stains and odors effectively, works in all water types, and offers good value for everyday use. Produced in Ethiopia with care, it supports local manufacturing and quality standards. Reliable, affordable, and trusted for your daily laundry needs.',
       images: [
         '/Products/detergent/1.png',
         '/Products/detergent/2.png'
       ]
     },
-    'kitchen-degreaser': {
-      name: 'Kitchen Degreaser',
-      description: 'Tackle the toughest kitchen grease and grime with our powerful Kitchen Degreaser. This fast-acting formula cuts through baked-on grease, food residue, and stubborn stains on all kitchen surfaces. Safe for use on stainless steel, ceramic, glass, and painted surfaces, it leaves your kitchen sparkling clean without harsh chemical residues.',
+    'Ajax': {
+      name: 'Ajax',
+      description: 'Our locally made blue kitchen soap easily removes grease, food stains, and dirt from your dishes and surfaces. Gentle but effective, it keeps your kitchen clean and fresh every day. Made in Ethiopia, it’s affordable, reliable, and trusted for household cleaning.',
       images: [
         '/Products/ajax/1.png',
         '/Products/ajax/2.png']
     },
-    'eco-friendly-line': {
-      name: 'Eco-Friendly Line',
+    'Dishwashing detergent': {
+      name: 'Dishwashing detergent',
       description:
-        'Our Eco-Friendly Line offers powerful cleaning performance with a conscience. Made with biodegradable ingredients and packaged in recyclable materials, these products are tough on dirt but gentle on the planet. Ideal for environmentally conscious households looking to reduce their footprint without sacrificing cleanliness.',
+        'Our kitchen detergent gives powerful cleaning while being safe for your family. Made with biodegradable ingredients, it removes grease and dirt effectively and keeps your kitchen fresh. Produced locally in Ethiopia, it’s affordable, eco-friendly, and gentle on the environment.',
       images: [
         '/Products/dish/1.png',
         '/Products/dish/2.png'
@@ -55,7 +55,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
   const product = productData[productName] || {
     name: 'Product Not Found',
     description: 'The requested product could not be found.',
-    images: ['https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1']
+    images: ['/icon/404.svg']
   };
 
   const slideVariants = {
@@ -134,6 +134,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
     }, 200);
   };
 
+  const isProductFound = !!productData[productName];
+
   return (
     <>
       {/* Simple Navigation Loading Indicator */}
@@ -162,73 +164,89 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
             <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
           </button>
 
-          {/* Product Image Carousel */}
-          <div
-            className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12 mt-16"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentSlide}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
-                  opacity: { duration: 0.8 },
-                }}
-                className="absolute inset-0"
+          {isProductFound ? (
+            // Product Image Carousel
+            <div
+              className="relative h-96 md:h-[500px] rounded-lg overflow-hidden shadow-2xl mb-12 mt-16"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <AnimatePresence initial={false} custom={direction}>
+                <motion.div
+                  key={currentSlide}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: 'tween', duration: 1.2, ease: 'easeInOut' },
+                    opacity: { duration: 0.8 },
+                  }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={product.images[currentSlide]}
+                    alt={`${product.name} - View ${currentSlide + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
+                aria-label="Previous image"
               >
-                <img
-                  src={product.images[currentSlide]}
-                  alt={`${product.name} - View ${currentSlide + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
+                <ChevronLeft className="text-black" size={24} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
+                aria-label="Next image"
+              >
+                <ChevronRight className="text-black" size={24} />
+              </button>
 
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="text-black" size={24} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-300 hover:scale-110"
-              aria-label="Next image"
-            >
-              <ChevronRight className="text-black" size={24} />
-            </button>
-
-            {/* Navigation Dots */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {product.images.map((_: any, index: number) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? 'bg-white scale-170'
-                      : 'bg-white bg-opacity-70 hover:bg-opacity-85'
-                  }`}
-                />
-              ))}
+              {/* Navigation Dots */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {product.images.map((_: any, index: number) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? 'bg-white scale-170'
+                        : 'bg-white bg-opacity-70 hover:bg-opacity-85'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            // Not found: show SVG only, small and centered
+            <div className="flex flex-col items-center justify-center py-24">
+              <img
+                src="/icon/404.svg"
+                alt="Product Not Found"
+                className="w-32 h-32 mb-6"
+              />
+              {/* <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>Product Not Found</h2>
+              <p className={`text-lg mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                The requested product could not be found.
+              </p> */}
+            </div>
+          )}
 
           {/* Product Information */}
           <div className="text-center max-w-4xl mx-auto">
             <h1 className={`text-4xl md:text-5xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} relative inline-block mb-8 transition-colors duration-300`}>
               {product.name}
-              <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-24 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
+              {isProductFound && (
+                <div className={`absolute -bottom-2 left-1/2 transform -translate-x-1/2 translate-y-1 w-24 h-0.5 ${darkMode ? 'bg-white' : 'bg-[#A31621]'} transition-colors duration-300`}></div>
+              )}
             </h1>
-            
             <p className={`text-lg md:text-xl leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
               {product.description}
             </p>
