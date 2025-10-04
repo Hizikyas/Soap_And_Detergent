@@ -41,7 +41,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
         '/Products/ajax/1.png',
         '/Products/ajax/2.png']
     },
-    'Dishwashing detergent': {
+    'dishwashing-detergent': {
       name: 'Dishwashing detergent',
       description:
         'Our kitchen detergent gives powerful cleaning while being safe for your family. Made with biodegradable ingredients, it removes grease and dirt effectively and keeps your kitchen fresh. Produced locally in Ethiopia, it’s affordable, eco-friendly, and gentle on the environment.',
