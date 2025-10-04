@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   <img src={'/Logo1.png'} alt="Company Logo" className="h-25 w-auto rounded-[5px]" />
               <MapSection darkMode={darkMode} />
               <p className="text-gray-300">
-                Leading the way in innovative cleaning solutions for over 30 years.
+                Since 2016.
               </p>
             </div>
 
@@ -119,34 +119,26 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                 <ul className="space-y-3">
                   <li>
                     <a
-                      href="#"
+                      href="/products/ultra-clean-detergent"
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-400 linear"
                     >
-                      Laundry Detergent
+                      Ultra Clean Detergent
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/products/Ajax"
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-3 transition-all duration-400 linear"
                     >
-                      Dish Soap
+                      Ajax
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="/products/dishwashing-detergent"
                       className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-400 linear"
                     >
-                      All-Purpose Cleaner
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="inline-block text-gray-300 hover:text-white transform hover:translate-x-4 transition-all duration-400 linear"
-                    >
-                      Eco-Friendly Line
+                      Dishwashing detergent
                     </a>
                   </li>
                 </ul>
@@ -158,15 +150,15 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Mail size={16} />
-                    <span className="text-gray-300">info@cleanco.com</span>
+                    <span className="text-gray-300">info@mahpile.com</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Phone size={16} />
-                    <span className="text-gray-300">+1 (555) 123-4567</span>
+                    <span className="text-gray-300">+251 912-977-545</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin size={16} />
-                    <span className="text-gray-300">123 Clean Street, Soap City, SC 12345</span>
+                    <span className="text-gray-300">Akaki kality ,Addis ababa, Ethiopia</span>
                   </div>
                   <div className="flex space-x-4 mt-4">
                     <a
@@ -198,22 +190,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
 
           <div className="border-t border-gray-700 mt-8 pt-8 text-center">
             <p className="text-gray-300">
-              © 2025 CleanCo. All rights reserved. |{' '}
-              <Link
-                href="/privacy"
-                onClick={handleNavigation}
-                className="hover:text-white transition-colors duration-300"
-              >
-                Privacy Policy
-              </Link>{' '}
-              |{' '}
-              <Link
-                href="/terms"
-                onClick={handleNavigation}
-                className="hover:text-white transition-colors duration-300"
-              >
-                Terms of Service
-              </Link>
+              © 2025 Mahpile General Business PLC. All rights reserved.
             </p>
           </div>
         </div>
