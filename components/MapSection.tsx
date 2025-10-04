@@ -10,8 +10,8 @@ const MapSection: React.FC<MapSectionProps> = ({ darkMode }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
 
-  // Sample coordinates for CleanCo store (e.g., New York City)
-  const position: [number, number] = [40.7128, -74.0060];
+  // Coordinates for Akaki Kality, Addis Ababa, Ethiopia
+  const position: [number, number] = [8.9806, 38.7578];
 
   useEffect(() => {
     setIsMounted(true);
@@ -61,7 +61,7 @@ const MapSection: React.FC<MapSectionProps> = ({ darkMode }) => {
           marker = L.marker(position).addTo(map);
           
           // Add popup to marker
-          marker.bindPopup('CleanCo Store <br /> 123 Main Street, New York, NY');
+          marker.bindPopup('Mahpile General Business PLC <br /> Akaki Kality, Addis Ababa, Ethiopia');
         }
 
       } catch (error) {

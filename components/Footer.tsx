@@ -158,7 +158,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <MapPin size={16} />
-                    <span className="text-gray-300">Akaki kality ,Addis ababa, Ethiopia</span>
+                    <span className="text-gray-300">Akaki kality, Addis ababa, Ethiopia</span>
                   </div>
                   <div className="flex space-x-4 mt-4">
                     <a
