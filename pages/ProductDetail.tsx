@@ -232,10 +232,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
                 alt="Product Not Found"
                 className="w-32 h-32 mb-6"
               />
-              {/* <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>Product Not Found</h2>
-              <p className={`text-lg mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                The requested product could not be found.
-              </p> */}
             </div>
           )}
 
