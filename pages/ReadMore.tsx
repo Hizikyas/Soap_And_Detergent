@@ -33,43 +33,43 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
     };
   }, []);
 
-  const shareholders = [
-    {
-      name: 'John Smith',
-      percentage: '35%',
-      role: 'Founder & CEO',
-      description:
-        'Investment firm founded to “focus on growth capital in small and medium sized companies with superior return potential” in Ethiopia and greater East Africa.',
-    },
-    {
-      name: 'Sarah Johnson',
-      percentage: '25%',
-      role: 'Co-Founder',
-      description:
-        'Instrumental in shaping CleanCo’s vision and strategy with hands-on operational expertise.',
-    },
-    {
-      name: 'Michael Brown',
-      percentage: '20%',
-      role: 'Lead Investor',
-      description:
-        'Provides capital and strategic insight from years of experience in manufacturing industries.',
-    },
-    {
-      name: 'Investment Group LLC',
-      percentage: '15%',
-      role: 'Corporate Investor',
-      description:
-        'Focuses on emerging markets and scalable enterprises with long-term growth perspectives.',
-    },
-    {
-      name: 'Employee Stock Options',
-      percentage: '5%',
-      role: 'Employee Ownership',
-      description:
-        'Represents collective ownership by CleanCo employees to promote shared success.',
-    },
-  ];
+  // const shareholders = [
+  //   {
+  //     name: 'John Smith',
+  //     percentage: '35%',
+  //     role: 'Founder & CEO',
+  //     description:
+  //       'Investment firm founded to “focus on growth capital in small and medium sized companies with superior return potential” in Ethiopia and greater East Africa.',
+  //   },
+  //   {
+  //     name: 'Sarah Johnson',
+  //     percentage: '25%',
+  //     role: 'Co-Founder',
+  //     description:
+  //       'Instrumental in shaping CleanCo’s vision and strategy with hands-on operational expertise.',
+  //   },
+  //   {
+  //     name: 'Michael Brown',
+  //     percentage: '20%',
+  //     role: 'Lead Investor',
+  //     description:
+  //       'Provides capital and strategic insight from years of experience in manufacturing industries.',
+  //   },
+  //   {
+  //     name: 'Investment Group LLC',
+  //     percentage: '15%',
+  //     role: 'Corporate Investor',
+  //     description:
+  //       'Focuses on emerging markets and scalable enterprises with long-term growth perspectives.',
+  //   },
+  //   {
+  //     name: 'Employee Stock Options',
+  //     percentage: '5%',
+  //     role: 'Employee Ownership',
+  //     description:
+  //       'Represents collective ownership by CleanCo employees to promote shared success.',
+  //   },
+  // ];
 
   return (
     <>
@@ -126,21 +126,9 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
                 darkMode ? 'text-gray-300' : 'text-gray-700'
               } transition-colors duration-300`}
             >
-              CleanCo has been at the forefront of the cleaning industry for over three decades, revolutionizing how families
-              and businesses approach cleanliness and hygiene. Founded in 1990 with a simple mission to create effective,
-              safe, and environmentally responsible cleaning solutions, we have grown from a small startup to a leading
-              manufacturer serving millions of customers worldwide.
+              Mahpile General Business PLC, founded in 2016, is a locally established company based in Akaki Kality. The company focuses on producing and distributing quality household cleaning products that serve the needs of everyday consumers. With a strong commitment to local manufacturing, Mahpile General Business PLC strives to deliver reliable, affordable, and trusted products. Guided by a vision of growth and customer satisfaction, the company continues to strengthen its presence in the Ethiopian market.
             </p>
-            <p
-              className={`text-lg leading-relaxed ${
-                darkMode ? 'text-gray-300' : 'text-gray-700'
-              } mt-4 transition-colors duration-300`}
-            >
-              Our state-of-the-art manufacturing facilities utilize cutting-edge technology and sustainable practices to
-              produce a comprehensive range of cleaning products. From powerful laundry detergents to gentle personal care
-              items, every product undergoes rigorous testing to ensure it meets our high standards for quality, safety,
-              and environmental responsibility.
-            </p>
+
           </div>
 
           {/* Shareholders */}
@@ -150,36 +138,36 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
                 darkMode ? 'text-white' : 'text-[#A31621]'
               } relative inline-block mb-6 transition-colors duration-300`}
             >
-              Shareholders
+              Our Clients
             </h2>
 
             <p className={`mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              Currently Ethio-Asian is partnering up with Zoscales Partners (ZP) to meet its objective of becoming strong player within the personal care space by aspiring the right niche market of the lower and middle income class of Ethiopia. Currently, the shareholders of the company are:
-            </p>
+             Currently, Mahpile General Business PLC is expanding its reach by partnering with local clients to distribute its products across different towns in Ethiopia. Currently, the company’s authorized clients are:
+             </p>
 
             <ol className="space-y-6">
               <li>
                 <h3 className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>
-                1. Zoscales Partners
+                1. Sualih Mohammed Ahimed
                 </h3>
                 <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  Investment firm founded to “focus on growth capital in small and medium sized companies with superior return potential” in Ethiopia and greater East Africa.
+                  Sualih Mohammed Ahimed has been granted representation  by Mahpile General Business PLC to sell its products. He distributes the products in Kombolcha, Dessie, and Beharbu.
                 </p>
               </li>
               <li>
                 <h3 className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>
-                2. East African Holdings S.C.
+                2. Yidnekachew Melese Bedane
                 </h3>
                 <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  East African Holdings and East Africa Group – East African Holdings S.C is the most experienced company in the country, operates in various sectors including manufacturing, agriculture, agro-processing, printing, packaging, real estate and import/export.
+                  Yidnekachew Melese Bedane holds permission  to sell the company's products and covers the towns of Hararige, Jijga, Fafen, and Wechale.
                 </p>
               </li>
               <li>
                 <h3 className={`font-semibold text-lg ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>
-                3. B.S. Shetty
+                3. Emawaye Ayalew Kassa
                 </h3>
                 <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                  B. S. Shetty started his career in 1980 with the Britannia and Nutrine group (biggest biscuit and confectionary manufacturer in India). He has over 38 years experience with over 28 years in East and Sub Saharan Africa. (Kenya, Tanzania, Uganda, Ethiopia).
+                  Emawaye Ayalew Kassa is authorized  to sell Mahpile's products in Woldia, Hara, and Kobo Mersa.
                 </p>
               </li>
             </ol>
