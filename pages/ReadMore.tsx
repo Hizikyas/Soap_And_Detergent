@@ -59,7 +59,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
         {/* Full-width Hero Image with Overlayed Back Button */}
         <div className="relative w-full h-[7rem] md:h-80 lg:h-[10rem] rounded-sm overflow-hidden">
           <img
-            src="/read_more_logo"
+            src="/read_more_logo.png"
             alt="Company Overview"
             className="absolute top-0 left-0 w-full h-full object-cover z-0"
           />
