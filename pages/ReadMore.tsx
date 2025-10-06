@@ -25,7 +25,6 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
     setLoading(true);
   };
 
-  // Debug log for component mount
   useEffect(() => {
     console.log('ReadMore component mounted');
     return () => {
@@ -33,43 +32,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
     };
   }, []);
 
-  // const shareholders = [
-  //   {
-  //     name: 'John Smith',
-  //     percentage: '35%',
-  //     role: 'Founder & CEO',
-  //     description:
-  //       'Investment firm founded to “focus on growth capital in small and medium sized companies with superior return potential” in Ethiopia and greater East Africa.',
-  //   },
-  //   {
-  //     name: 'Sarah Johnson',
-  //     percentage: '25%',
-  //     role: 'Co-Founder',
-  //     description:
-  //       'Instrumental in shaping CleanCo’s vision and strategy with hands-on operational expertise.',
-  //   },
-  //   {
-  //     name: 'Michael Brown',
-  //     percentage: '20%',
-  //     role: 'Lead Investor',
-  //     description:
-  //       'Provides capital and strategic insight from years of experience in manufacturing industries.',
-  //   },
-  //   {
-  //     name: 'Investment Group LLC',
-  //     percentage: '15%',
-  //     role: 'Corporate Investor',
-  //     description:
-  //       'Focuses on emerging markets and scalable enterprises with long-term growth perspectives.',
-  //   },
-  //   {
-  //     name: 'Employee Stock Options',
-  //     percentage: '5%',
-  //     role: 'Employee Ownership',
-  //     description:
-  //       'Represents collective ownership by CleanCo employees to promote shared success.',
-  //   },
-  // ];
+
 
   return (
     <>
@@ -96,7 +59,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ darkMode }) => {
         {/* Full-width Hero Image with Overlayed Back Button */}
         <div className="relative w-full h-[7rem] md:h-80 lg:h-[10rem] rounded-sm overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=1200&h=400&dpr=1"
+            src="/read_more_logo"
             alt="Company Overview"
             className="absolute top-0 left-0 w-full h-full object-cover z-0"
           />
