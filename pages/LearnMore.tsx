@@ -29,14 +29,14 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
       image: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
     },
     {
-      year: '2015',
+      year: '2023',
       title: 'National Expansion',
       description: 'Expanded operations nationwide with distribution centers across the country.',
       image: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
     },
     {
       year: '2025',
-      title: 'Innovation Leader',
+      title: 'Innovation ',
       description: 'Today, CleanCo stands as a leader in innovative, sustainable cleaning solutions.',
       image: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
     },
