@@ -21,15 +21,15 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
     {
       id: 1,
       image: '/Carousal/dish.png',
-      title: 'Premium Laundry Detergent',
-      subtitle: 'Deep cleaning power for all fabrics',
+      title: 'Gentle Dish Soap ',
+      subtitle: 'Tough on grease, gentle on hands ',
       hasReadMore: true,
     },
     {
       id: 2,
       image: '/Carousal/Detergent.png',
-      title: 'Gentle Dish Soap',
-      subtitle: 'Tough on grease, gentle on hands',
+      title: 'Premium Laundry Detergent',
+      subtitle: 'Deep cleaning power for all fabrics',
       hasReadMore: false,
     },
     {
