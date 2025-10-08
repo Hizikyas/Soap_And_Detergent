@@ -170,12 +170,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
               </motion.div>
             ))}
           </div>
-
           </div>
-
-
-
-
         </div>
       </div>
     </>
