@@ -88,18 +88,7 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
                   darkMode ? 'text-gray-300' : 'text-[#A31621]'
                 } transition-colors duration-300`}
               >
-                At CleanCo, we've been pioneering innovative cleaning solutions for over three decades.
-                Our commitment to excellence drives us to create products that not only deliver superior
-                cleaning power but also care for your family and the environment.
-              </p>
-              <p
-                className={`text-lg leading-relaxed ${
-                  darkMode ? 'text-gray-300' : 'text-[#A31621]'
-                } transition-colors duration-300`}
-              >
-                From our state-of-the-art research facilities to our eco-friendly manufacturing processes,
-                every aspect of our business reflects our dedication to quality, sustainability, and
-                customer satisfaction.
+                At Mahpile General Business PLC, we are dedicated to providing high-quality cleaning solutions that make everyday life easier. Since our establishment in 2016, we have focused on creating products that deliver strong cleaning performance while being safe for families and the environment. From our production facilities in Akaki Kality to our commitment to sustainable practices, every step reflects our dedication to quality, reliability, and customer satisfaction.
               </p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

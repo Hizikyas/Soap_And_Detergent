@@ -48,16 +48,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       slug: 'dishwashing-detergent',
       image1: '/Products/dish/1.png',
       image2: '/Products/dish/2.png',
-    },
-    // {
-    //   id: 4,
-    //   name: 'Multi-Surface Cleaner',
-    //   category: 'All-Purpose',
-    //   slug: 'multi-surface-cleaner',
-    //   image1: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    //   image2: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
-    // },
-
+    }
   ];
 
   return (
@@ -99,7 +90,8 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
           </motion.div>
 
           {/* Products Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-[7rem]">
+          <div className='flex justify-center'> 
+          <div className="grid justify-center justify-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 mb-[7rem] max-w-7xl mx-auto ">
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -107,7 +99,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg"
+                className="relative group cursor-pointer rounded-lg overflow-hidden shadow-lg w-72"
                 onMouseEnter={() => setHoveredProduct(product.id)}
                 onMouseLeave={() => setHoveredProduct(null)}
               >
@@ -178,6 +170,12 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
               </motion.div>
             ))}
           </div>
+
+          </div>
+
+
+
+
         </div>
       </div>
     </>
