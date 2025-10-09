@@ -31,7 +31,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       description: 'Our locally made laundry detergent provides strong cleaning while being gentle on clothes. It removes stains and odors effectively, works in all water types, and offers good value for everyday use. Produced in Ethiopia with care, it supports local manufacturing and quality standards. Reliable, affordable, and trusted for your daily laundry needs.',
       images: [
         '/Products/detergent/1.png',
-        '/Products/detergent/2.png'
+        '/Products/detergent/carousal/2.png'
       ]
     },
     'Ajax': {

@@ -1,13 +1,22 @@
 'use client';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 interface AboutUsProps {
   darkMode: boolean;
 }
 
 const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
   // Debug log to detect multiple renders
+    const pathname = usePathname();
+    const [loading, setLoading] = useState(false);
+
+    const handleLinkClick = () => {
+    setLoading(true);
+  };
+
   useEffect(() => {
     console.log('AboutUs component mounted');
     return () => {
@@ -24,12 +33,21 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
         transition={{ duration: 0.6 }}
         className="w-full h-64 md:h-80 overflow-hidden shadow-lg mb-12 relative"
       >
-        <img
-          src="https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&dpr=1"
-          alt="CleanCo Company"
-          className="w-full h-full object-cover"
-          sizes="100vw"
-        />
+          <img
+            src="/read_more_logo.png"
+            alt="Company Overview"
+            className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          />
+          <Link
+            href="/"
+            onClick={handleLinkClick}
+            className="absolute top-5 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
+            aria-label="Go back to home"
+          >
+            <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
+            <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
+          </Link>
+        
       </motion.div>
 
       {/* Content Section */}
