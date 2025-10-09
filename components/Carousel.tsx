@@ -41,7 +41,7 @@ const Carousel: React.FC<CarouselProps> = ({ darkMode }) => {
     },
     {
       id: 4,
-      image: '/Carousal/Cartoon.png',
+      image: '/store.png',
       title: 'Eco-Friendly Range',
       subtitle: 'Clean conscience, clean home',
       hasReadMore: false,

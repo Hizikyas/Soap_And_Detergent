@@ -120,8 +120,8 @@ const WhoWeAre: React.FC<WhoWeAreProps> = ({ darkMode }) => {
             >
               <div className="rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-300">
                 <img
-                  src="https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-                  alt="Our Manufacturing Process"
+                  src="/Carousal/Cartoon.png"
+                  alt="Our product"
                   className="w-full h-80 object-cover"
                 />
               </div>
