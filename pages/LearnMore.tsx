@@ -10,37 +10,38 @@ interface LearnMoreProps {
 
 const LearnMore = ({ darkMode }: LearnMoreProps) => {
   const historyTimeline = [
-    {
-      year: '1990',
-      title: 'CleanCo Founded',
-      description: 'CleanCo established as a small family business with a vision to create superior cleaning products.',
-      image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-    },
-    {
-      year: '1995',
-      title: 'First Manufacturing Plant',
-      description: 'Opened our first state-of-the-art manufacturing facility in Soap City, SC.',
-      image: 'https://images.pexels.com/photos/4239013/pexels-photo-4239013.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-    },
-    {
-      year: '2005',
-      title: 'Eco-Friendly Initiative',
-      description: 'Launched our first line of environmentally sustainable cleaning products.',
-      image: 'https://images.pexels.com/photos/4239011/pexels-photo-4239011.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-    },
-    {
-      year: '2023',
-      title: 'National Expansion',
-      description: 'Expanded operations nationwide with distribution centers across the country.',
-      image: 'https://images.pexels.com/photos/4239014/pexels-photo-4239014.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-    },
-    {
-      year: '2025',
-      title: 'Innovation ',
-      description: 'Today, CleanCo stands as a leader in innovative, sustainable cleaning solutions.',
-      image: 'https://images.pexels.com/photos/4239009/pexels-photo-4239009.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-    },
-  ];
+  {
+    year: '2016',
+    title: 'Mahpile General Business PLC Founded',
+    description: 'Mahpile General Business PLC was established in 2016, marking the beginning of its journey in the cleaning products industry.',
+    image: '/History/logo.png',
+  },
+  {
+    year: null,
+    title: 'Ajax Launched',
+    description: 'The company started its product line with Ajax, introducing quality cleaning solutions to households.',
+    image: '/History/ajax.png',
+  },
+  {
+    year: null ,
+    title: 'Kitchen Detergent Introduced',
+    description: 'Following Ajax, Mahpile expanded its offerings with kitchen detergents to meet diverse cleaning needs.',
+    image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
+  },
+  {
+    year: null,
+    title: 'Laundry Detergent Released',
+    description: 'Mahpile continued to grow by launching laundry detergents, establishing a strong presence in household cleaning.',
+    image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
+  },
+  // {
+  //   year: null,
+  //   title: 'Soap Products Launched',
+  //   description: 'Expanding into personal care, Mahpile introduced a range of soaps, completing its portfolio in cleaning and hygiene products.',
+  //   image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
+  // },
+]
+
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
@@ -80,10 +81,10 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
           >
             <Quote className={`${darkMode ? 'text-gray-600' : 'text-gray-300'} absolute top-4 right-4`} size={48} />
             <blockquote className={`text-lg leading-relaxed ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6 italic`}>
-              "CleanCo represents more than just cleaning products — we embody a commitment to excellence, sustainability, and innovation..."
+              "Mahpile Moves, Aster Leads!"
             </blockquote>
             <div className="border-t pt-4">
-              <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>SARAH JOHNSON</h3>
+              <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'}`}>ASTER GELAN</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} font-medium`}>CHIEF EXECUTIVE OFFICER</p>
             </div>
           </motion.div>
@@ -119,7 +120,7 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
                 className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}
               >
                 <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-xl shadow-lg`}>
-                  <div className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-2`}>{item.year}</div>
+                 {item.year && <div className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-2`}>{item.year}</div>}
                   <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-3`}>{item.title}</h3>
                   <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{item.description}</p>
                 </div>
@@ -132,7 +133,7 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
                 viewport={{ once: true, margin: "-50px" }}
                 className={`w-5/12 ${index % 2 === 0 ? 'pl-8' : 'pr-8'}`}
               >
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg">
+                <div className="w-32 h-32  mx-auto rounded-full overflow-hidden shadow-lg">
                   <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                 </div>
               </motion.div>
