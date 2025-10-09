@@ -176,7 +176,7 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                       <FaXTwitter className="text-gray-300 hover:text-black cursor-pointer" size={20} />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.instagram.com/biruk_gizaw21/"
                       aria-label="Instagram"
                       className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
