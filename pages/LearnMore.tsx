@@ -26,13 +26,13 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
     year: null ,
     title: 'Kitchen Detergent Introduced',
     description: 'Following Ajax, Mahpile expanded its offerings with kitchen detergents to meet diverse cleaning needs.',
-    image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
+    image: '/History/kitchen_detergent.png',
   },
   {
     year: null,
     title: 'Laundry Detergent Released',
     description: 'Mahpile continued to grow by launching laundry detergents, establishing a strong presence in household cleaning.',
-    image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
+    image: '/History/laundery.png',
   },
   // {
   //   year: null,
@@ -148,11 +148,11 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
           viewport={{ once: true, margin: "-100px" }}
           className="grid md:grid-cols-3 gap-8 mt-20"
         >
-          {['Quality', 'Innovation', 'Sustainability'].map((value, i) => {
+          {['Reliability', 'Growth', 'Care'].map((value, i) => {
             const text = [
-              'Uncompromising commitment to the highest quality standards.',
-              'Continuously developing cutting-edge solutions.',
-              'Protecting our planet through responsible practices.',
+              'Delivering dependable cleaning and hygiene products to households.',
+              'Expanding our product range from Ajax to detergents and soaps to meet diverse needs.',
+              'Caring for people and the environment through safe and responsible practices.',
             ][i];
             return (
               <motion.div
