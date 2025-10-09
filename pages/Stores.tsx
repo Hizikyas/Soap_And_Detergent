@@ -59,7 +59,7 @@ const StoresMapSection = ({
   darkMode: boolean;
   hoveredStore: number | null;
 }) => {
-  const position: [number, number] = [9.03, 38.76];
+  const position: [number, number] = [8.8926, 38.8150]; // Center near your stores
   const mapStyle = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   useEffect(() => {
@@ -134,40 +134,40 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
   const stores: Store[] = [
     {
       id: 1,
-      name: 'CleanCo Bole',
-      address: 'Bole Road, Bole, Addis Ababa, Ethiopia',
+      name: 'Mahpile Kality Store',
+      address: 'Kality, Addis Ababa, Ethiopia',
       phone: '+251 911 123 456',
       hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-6PM',
-      lat: 9.0064,
-      lng: 38.7766,
+      lat: 8.8958,
+      lng: 38.7892,
     },
     {
       id: 2,
-      name: 'CleanCo Piazza',
-      address: 'Churchill Avenue, Piazza, Addis Ababa, Ethiopia',
+      name: 'Mahpile Koye feche shop',
+      address: 'Koye fiche, Oromia Region, Ethiopia',
       phone: '+251 922 234 567',
       hours: 'Mon-Sat: 10AM-9PM, Sun: 11AM-7PM',
-      lat: 9.0330,
-      lng: 38.7522,
+      lat: 8.8894806,
+      lng: 38.8409611,
     },
-    {
-      id: 3,
-      name: 'CleanCo Mexico Square',
-      address: 'Mexico Square, Lideta, Addis Ababa, Ethiopia',
-      phone: '+251 933 345 678',
-      hours: 'Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM',
-      lat: 9.0101,
-      lng: 38.7384,
-    },
-    {
-      id: 4,
-      name: 'CleanCo CMC',
-      address: 'CMC Road, Yeka, Addis Ababa, Ethiopia',
-      phone: '+251 944 456 789',
-      hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-5PM',
-      lat: 9.0148,
-      lng: 38.8201,
-    },
+    // {
+    //   id: 3,
+    //   name: 'CleanCo Mexico Square',
+    //   address: 'Mexico Square, Lideta, Addis Ababa, Ethiopia',
+    //   phone: '+251 933 345 678',
+    //   hours: 'Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM',
+    //   lat: 9.0101,
+    //   lng: 38.7384,
+    // },
+    // {
+    //   id: 4,
+    //   name: 'CleanCo CMC',
+    //   address: 'CMC Road, Yeka, Addis Ababa, Ethiopia',
+    //   phone: '+251 944 456 789',
+    //   hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-5PM',
+    //   lat: 9.0148,
+    //   lng: 38.8201,
+    // },
   ];
 
   const [hoveredStore, setHoveredStore] = useState<number | null>(null);
