@@ -46,8 +46,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       description:
         'Our kitchen detergent gives powerful cleaning while being safe for your family. Made with biodegradable ingredients, it removes grease and dirt effectively and keeps your kitchen fresh. Produced locally in Ethiopia, it’s affordable, eco-friendly, and gentle on the environment.',
       images: [
-        '/Products/dish/1.png',
-        '/Products/dish/2.png'
+        '/Products/dish/carousal/1.png',
+        '/Products/dish/carousal/2.png'
       ]
     },
   };
