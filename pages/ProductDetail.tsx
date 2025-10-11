@@ -30,7 +30,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       name: 'Ultra Clean Detergent',
       description: 'Our locally made laundry detergent provides strong cleaning while being gentle on clothes. It removes stains and odors effectively, works in all water types, and offers good value for everyday use. Produced in Ethiopia with care, it supports local manufacturing and quality standards. Reliable, affordable, and trusted for your daily laundry needs.',
       images: [
-        '/Products/detergent/1.png',
+        '/Products/detergent/carousal/1.png',
         '/Products/detergent/carousal/2.png'
       ]
     },
@@ -38,8 +38,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ productName, darkMode = f
       name: 'Ajax',
       description: 'Our locally made blue kitchen soap easily removes grease, food stains, and dirt from your dishes and surfaces. Gentle but effective, it keeps your kitchen clean and fresh every day. Made in Ethiopia, it’s affordable, reliable, and trusted for household cleaning.',
       images: [
-        '/Products/ajax/1.png',
-        '/Products/ajax/2.png']
+        '/Products/ajax/carousal/1.png',
+        '/Products/ajax/carousal/2.png']
     },
     'dishwashing-detergent': {
       name: 'Dishwashing detergent',
