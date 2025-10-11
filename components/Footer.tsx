@@ -162,21 +162,24 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
                   </div>
                   <div className="flex space-x-4 mt-4">
                     <a
-                      href="#"
+                      href="https://web.facebook.com/"
+                      target="_blank"
                       aria-label="Facebook"
                       className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
                       <Facebook className="text-gray-300 hover:text-blue-400 cursor-pointer" size={20} />
                     </a>
                     <a
-                      href="#"
-                      aria-label="Twitter"
+                      href="https://x.com/"
+                      target="_blank"
+                      aria-label="X"
                       className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
                       <FaXTwitter className="text-gray-300 hover:text-black cursor-pointer" size={20} />
                     </a>
                     <a
                       href="https://www.instagram.com/biruk_gizaw21/"
+                      target="_blank"
                       aria-label="Instagram"
                       className="inline-block transform hover:translate-y-1 transition-all duration-300 linear"
                     >
