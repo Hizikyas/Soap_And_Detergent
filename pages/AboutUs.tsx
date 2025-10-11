@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
+
 interface AboutUsProps {
   darkMode: boolean;
 }
 
 const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
-  // Debug log to detect multiple renders
-    const pathname = usePathname();
-    const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
+  const [loading, setLoading] = useState(false);
 
-    const handleLinkClick = () => {
+  const handleLinkClick = () => {
     setLoading(true);
   };
 
@@ -26,33 +26,31 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-[#FCF7F8]'} transition-colors duration-300`}>
-      {/* Full-width Image Section */}
+      {/* Header Image */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="w-full h-64 md:h-80 overflow-hidden shadow-lg mb-12 relative"
       >
-          <img
-            src="/read_more_logo.png"
-            alt="Company Overview"
-            className="absolute top-0 left-0 w-full h-full object-cover z-0"
-          />
-          <Link
-            href="/"
-            onClick={handleLinkClick}
-            className="absolute top-5 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
-            aria-label="Go back to home"
-          >
-            <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
-            <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
-          </Link>
-        
+        <img
+          src="/read_more_logo.png"
+          alt="Company Overview"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        />
+        <Link
+          href="/"
+          onClick={handleLinkClick}
+          className="absolute top-5 left-6 z-10 inline-flex items-center gap-2 bg-white bg-opacity-70 hover:bg-opacity-90 rounded-full p-2 pl-3 pr-4 transition-all duration-300 hover:scale-110"
+          aria-label="Go back to home"
+        >
+          <ArrowLeft className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} transition-colors duration-300`} size={24} />
+          <span className={`${darkMode ? 'text-gray-900' : 'text-[#A31621]'} font-medium transition-colors duration-300`}>Go Back</span>
+        </Link>
       </motion.div>
 
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Page Title */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,7 +63,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
           </h1>
         </motion.div>
 
-        {/* Company Passage */}
+        {/* Company Info */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,7 +74,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
           >
             Our Story
@@ -85,17 +83,19 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className="leading-relaxed"
           >
-            Founded in 1990 in Soap City, SC, CleanCo has grown to become a leader in innovative cleaning solutions, employing over 2,500 dedicated professionals and offering more than 200 high-quality products. Our commitment to excellence drives us to deliver superior cleaning solutions that enhance the lives of families and communities worldwide.
+            Mahpile General Business PLC was founded in 2016 in Addis Ababa, Ethiopia. 
+            The company began its journey by producing Ajax and has since expanded its product line to include kitchen detergents, laundry detergents, and various soap products. 
+            Mahpile is committed to delivering affordable, effective, and high-quality cleaning solutions that cater to the needs of Ethiopian households while supporting local manufacturing and employment.
           </motion.p>
-          
+
           <motion.h3 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
           >
             Vision
@@ -104,17 +104,17 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className="leading-relaxed"
           >
-            We envision being the world's leading provider of sustainable cleaning solutions, enhancing quality of life while protecting our planet for future generations.
+            To become a leading manufacturer of trusted cleaning and personal care products in Ethiopia, recognized for quality, affordability, and sustainability.
           </motion.p>
-          
+
           <motion.h3 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
           >
             Mission
@@ -123,17 +123,17 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className="leading-relaxed"
           >
-            CleanCo is dedicated to developing environmentally responsible cleaning products that deliver outstanding performance, ensuring the safety and well-being of our customers, employees, and the environment.
+            To provide locally made, effective, and environmentally safe cleaning and hygiene products that improve the quality of everyday life and strengthen Ethiopia’s industrial growth.
           </motion.p>
-          
+
           <motion.h3 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
           >
             Objectives
@@ -142,21 +142,21 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className="leading-relaxed space-y-2 list-disc list-inside"
           >
-            <li>Achieve 25% market share in the premium cleaning products segment by 2030.</li>
-            <li>Reduce environmental impact by 50% through sustainable manufacturing practices.</li>
-            <li>Expand our product line to include 100% biodegradable formulations.</li>
-            <li>Maintain customer satisfaction ratings above 95%.</li>
-            <li>Foster innovation through continuous research and development.</li>
+            <li>Expand product variety and accessibility across Ethiopia.</li>
+            <li>Maintain consistent quality through innovation and technology.</li>
+            <li>Encourage sustainable and responsible production practices.</li>
+            <li>Support local suppliers and create employment opportunities.</li>
+            <li>Build long-term trust with customers through reliability and service.</li>
           </motion.ul>
-          
+
           <motion.h3 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} transition-colors duration-300`}
           >
             Strategies
@@ -165,15 +165,14 @@ const AboutUs: React.FC<AboutUsProps> = ({ darkMode }) => {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             className="leading-relaxed space-y-2 list-disc list-inside"
           >
-            <li>Invest in cutting-edge research and development facilities.</li>
-            <li>Partner with environmental organizations to promote sustainability.</li>
-            <li>Implement advanced quality control systems across all manufacturing processes.</li>
-            <li>Expand distribution networks to reach underserved markets.</li>
-            <li>Develop strategic partnerships with retail chains and e-commerce platforms.</li>
-            <li>Focus on employee development and workplace safety initiatives.</li>
+            <li>Invest in modern equipment and continuous process improvement.</li>
+            <li>Strengthen brand recognition through customer-centered marketing.</li>
+            <li>Prioritize eco-friendly materials and waste reduction initiatives.</li>
+            <li>Develop strong partnerships with retailers and distributors nationwide.</li>
+            <li>Empower employees through training and inclusive workplace culture.</li>
           </motion.ul>
         </motion.div>
       </div>
