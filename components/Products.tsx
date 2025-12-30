@@ -65,7 +65,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
         )}
       </AnimatePresence>
 
-      <section className={`py-16 ${darkMode ? 'bg-gray-900' : 'bg-white'} transition-colors duration-300`} id="products">
+      <section className={ `py-16 ${darkMode ? 'bg-gray-900' : 'bg-white' } transition-colors duration-300`} id="products">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -92,7 +92,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
                       <div className="relative h-64 w-full">
-                        {/* Image 1 */}
+                        {/* Img 1 */}
                         <motion.img
                           src={product.image1}
                           alt={product.name}
@@ -104,7 +104,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                           transition={{ duration: 0.5 }}
                         />
       
-                        {/* Image 2 */}
+                        {/* Img 2 */}
                         <motion.img
                           src={product.image2}
                           alt={`${product.name} alternative`}
@@ -123,7 +123,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
                           transition={{ duration: 0.3 }}
                         />
       
-                        {/* Hover content */}
+                        {/* Hover content for each product */}
                         <motion.div
                           className="absolute inset-0 flex flex-col items-center justify-center"
                           animate={{
@@ -146,7 +146,7 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
       
                         {/* Category Badge */}
                         <motion.div
-                          className={`absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium ${darkMode ? 'bg-white text-gray-800' : 'bg-[#A31621] text-white'}`}
+                          className={ `absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium ${darkMode ? 'bg-white text-gray-800' : 'bg-[#A31621] text-white'}`}
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.2 }}
