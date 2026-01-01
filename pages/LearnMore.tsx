@@ -34,12 +34,7 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
     description: 'Mahpile continued to grow by launching laundry detergents, establishing a strong presence in household cleaning.',
     image: '/History/laundery.png',
   },
-  // {
-  //   year: null,
-  //   title: 'Soap Products Launched',
-  //   description: 'Expanding into personal care, Mahpile introduced a range of soaps, completing its portfolio in cleaning and hygiene products.',
-  //   image: 'https://images.pexels.com/photos/4239010/pexels-photo-4239010.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1',
-  // },
+ 
 ]
 
 
