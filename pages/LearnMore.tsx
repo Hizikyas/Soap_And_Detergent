@@ -67,7 +67,7 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
             className="relative rounded-2xl overflow-hidden shadow-2xl"
           >
             <img
-              src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+             src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
               alt="CEO Portrait"
               className="w-full h-96 object-cover"
             />
@@ -89,7 +89,6 @@ const LearnMore = ({ darkMode }: LearnMoreProps) => {
             </div>
           </motion.div>
         </motion.div>
-
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
