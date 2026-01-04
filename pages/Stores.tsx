@@ -65,7 +65,6 @@ const StoresMapSection = ({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const L = require('leaflet');
-      // Fix for default marker icons
       delete (L.Icon.Default.prototype as any)._getIconUrl;
       L.Icon.Default.mergeOptions({
         iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -150,24 +149,6 @@ const Stores: React.FC<StoresProps> = ({ darkMode }) => {
       lat: 8.8894806,
       lng: 38.8409611,
     },
-    // {
-    //   id: 3,
-    //   name: 'CleanCo Mexico Square',
-    //   address: 'Mexico Square, Lideta, Addis Ababa, Ethiopia',
-    //   phone: '+251 933 345 678',
-    //   hours: 'Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM',
-    //   lat: 9.0101,
-    //   lng: 38.7384,
-    // },
-    // {
-    //   id: 4,
-    //   name: 'CleanCo CMC',
-    //   address: 'CMC Road, Yeka, Addis Ababa, Ethiopia',
-    //   phone: '+251 944 456 789',
-    //   hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-5PM',
-    //   lat: 9.0148,
-    //   lng: 38.8201,
-    // },
   ];
 
   const [hoveredStore, setHoveredStore] = useState<number | null>(null);
