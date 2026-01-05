@@ -26,15 +26,8 @@ const TileLayer = dynamic(
   { ssr: false }
 );
 
-const Marker = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Marker),
-  { ssr: false }
-);
-
-const Popup = dynamic(
-  () => import('react-leaflet').then((mod) => mod.Popup),
-  { ssr: false }
-);
+const Marker = dynamic(  () => import('react-leaflet').then((mod) => mod.Marker),  { ssr: false });
+const Popup = dynamic(  () => import('react-leaflet').then((mod) => mod.Popup),  { ssr: false });
 
 interface StoresProps {
   darkMode: boolean;
