@@ -22,8 +22,6 @@ const Products: React.FC<ProductsProps> = ({ darkMode }) => {
   const handleNavigation = () => {
     setIsNavigating(true);
   };
-
-
   const products = [
     {
       id: 1,
