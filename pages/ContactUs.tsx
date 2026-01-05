@@ -103,64 +103,30 @@ const ContactUs: React.FC<ContactUsProps> = ({ darkMode }) => {
                 <div className="flex items-center gap-3">
                   <Phone className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    +1 (555) 123-4567
+                    +251 912-977-545
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    sales@cleanco.com
+                    info@mahpile.com
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
+                {/* <div className="flex items-center gap-3">
                   <Globe className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
                     www.cleanco.com/sales
                   </span>
-                </div>
+                </div> */}
                 <div className="flex items-start gap-3">
                   <MapPin className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={20} />
                   <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    123 Clean Street, Sales Department<br />
-                    Soap City, SC 12345
+                    Akaki kality, Addis ababa<br />
+                    Ethiopia
                   </span>
                 </div>
               </div>
             </motion.div>
-
-            {/* General Enquiries */}
-            {/* <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} p-8 rounded-lg shadow-lg transition-colors duration-300`}>
-              <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-[#A31621]'} mb-6 transition-colors duration-300`}>
-                General Enquiries
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Phone className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    +1 (555) 987-6543
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    info@cleanco.com
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Globe className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300`} size={20} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    www.cleanco.com/support
-                  </span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} mt-1 transition-colors duration-300`} size={20} />
-                  <span className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} transition-colors duration-300`}>
-                    123 Clean Street, Customer Service<br />
-                    Soap City, SC 12345
-                  </span>
-                </div>
-              </div>
-            </div> */}
 
           </motion.div>
 
