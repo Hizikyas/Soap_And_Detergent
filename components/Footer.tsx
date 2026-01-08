@@ -24,13 +24,6 @@ const Footer: React.FC<FooterProps> = ({ darkMode }) => {
     setIsNavigating(true);
   };
 
-  // // Debug log for component mount
-  // useEffect(() => {
-  //   console.log('Footer component mounted');
-  //   return () => {
-  //     console.log('Footer component unmounted');
-  //   };
-  // }, []);
 
   return (
     <>
