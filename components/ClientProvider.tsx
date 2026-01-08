@@ -36,7 +36,6 @@ const ClientProvider: React.FC<ClientProviderProps> = ({ children }) => {
     localStorage.setItem("darkMode", JSON.stringify(newMode));
   };
 
-  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
       <div className="min-h-screen bg-[#FCF7F8] transition-colors duration-300">
